@@ -12,7 +12,18 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
-      // In v4, it's better to use CSS variables for colors
+      animation: {
+        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'twinkle': 'twinkle 3s ease-in-out infinite',
+        'twinkle-delayed': 'twinkle 3s ease-in-out 1s infinite',
+        'twinkle-slow': 'twinkle 4s ease-in-out 0.5s infinite',
+      },
+      keyframes: {
+        twinkle: {
+          '0%, 100%': { opacity: 1 },
+          '50%': { opacity: 0.3 },
+        }
+      },
       colors: {
         primary: {
           light: 'rgb(var(--color-primary-light) / <alpha-value>)',
