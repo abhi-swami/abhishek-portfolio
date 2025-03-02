@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/Hero";
+import Skills from "@/components/skills/Skills";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,6 +23,8 @@ export default function Home() {
       className={`${inter.className} min-h-screen bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark`}
     >
       <Navbar />
+      <HeroSection/>
+      <Skills/>
 
       <div className="pt-20 p-8 pb-20 gap-16 sm:p-20">
         <h1 className="text-4xl font-bold">

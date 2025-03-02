@@ -1,57 +1,26 @@
 // components/ThemeToggle.js
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
+import { useTheme } from '../context/ThemeContext';
 
 export default function ThemeToggle() {
-  const [darkMode, setDarkMode] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  // Initialize theme from localStorage or system preference
-  useEffect(() => {
-    setMounted(true);
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-
-    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-      document.documentElement.classList.add("dark");
-      setDarkMode(true);
-    } else {
-      document.documentElement.classList.remove("dark");
-      setDarkMode(false);
-    }
-  }, []);
-
-  const toggleDarkMode = () => {
-    if (darkMode) {
-      // Switch to light
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    } else {
-      // Switch to dark
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    }
-    setDarkMode(!darkMode);
-  };
+  const { isDarkMode, toggleTheme, mounted } = useTheme();
 
   // Don't render during SSR to prevent hydration mismatch
   if (!mounted) return <div className="w-10 h-10"></div>;
 
   return (
     <button
-      onClick={toggleDarkMode}
+      onClick={toggleTheme}
       className="p-2 rounded-full bg-[rgb(var(--color-nav))] transition-all duration-300 ease-in-out 
-                focus:outline-none "
-      aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+                focus:outline-none"
+      aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
     >
       <div className="relative w-6 h-6">
         {/* Sun */}
         <div
           className={`absolute inset-0 transition-opacity duration-300 ease-in-out ${
-            darkMode ? "opacity-100" : "opacity-0"
+            isDarkMode ? "opacity-100" : "opacity-0"
           }`}
         >
           <svg
@@ -73,7 +42,7 @@ export default function ThemeToggle() {
         {/* Moon */}
         <div
           className={`absolute inset-0 transition-opacity duration-300 ease-in-out ${
-            darkMode ? "opacity-0" : "opacity-100"
+            isDarkMode ? "opacity-0" : "opacity-100"
           }`}
         >
           <svg

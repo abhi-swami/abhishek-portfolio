@@ -1,0 +1,131 @@
+/* index.module.css */
+
+.skillsSection {
+    width: 100%;
+    padding: 5rem 0;
+    background-color: rgb(var(--color-background));
+  }
+  
+  .sectionHeading {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .sectionHeading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: rgb(var(--color-primary-light));
+  }
+  
+  .glassContainer {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .skillCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .skillCard:hover {
+    transform: translateY(-8px);
+  }
+  
+  .iconContainer {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+  }
+  
+  .skillCard:hover .iconContainer {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Color settings for icons */
+  .iconSvg {
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+  }
+  
+  /* Different colors for different icons */
+  .html { color: #E44D26; }
+  .css { color: #264DE4; }
+  .javascript { color: #F7DF1E; }
+  .typescript { color: #3178C6; }
+  .react { color: #61DAFB; }
+  .chakraui { color: #319795; }
+  .redux { color: #764ABC; }
+  .nodejs { color: #339933; }
+  .mongodb { color: #47A248; }
+  .npm { color: #CB3837; }
+  .vscode { color: #007ACC; }
+  
+  /* Special treatment for Express - always white */
+  .express { 
+    color: black; 
+  }
+  
+  :global(.dark) .express {
+    color: white !important;
+  }
+  
+
+  /* Special treatment for GitHub - inverted colors */
+  .github {
+    color: black;
+    background-color: white;
+    border-radius: 50%;
+    padding: 2px;
+  }
+  
+  :global(.dark) .github {
+    color: white;
+    background-color: black;
+  }
+  
+  /* Dark mode - Grayscale with hover effect for other icons */
+  :global(.dark) .iconSvg:not(.express):not(.github) {
+    filter: grayscale(1) brightness(1.75);
+  }
+  
+  :global(.dark) .skillCard:hover .iconSvg:not(.express):not(.github) {
+    filter: grayscale(0);
+  }
+  
+  /* Pulse animation for the icons */
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+  
+  .skillCard:hover .iconSvg:not(.express):not(.github) {
+    animation: pulse 2s infinite;
+  }
+  
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    .iconContainer {
+      width: 5rem;
+      height: 5rem;
+    }
+  }

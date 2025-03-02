@@ -1,104 +1,59 @@
-// components/Hero.js
-"use client";
-
+// components/HeroSection.js
 import Image from "next/image";
-import Link from "next/link";
+import AbhiImage from "../public/abhi.png";
+import { useTheme } from "@/context/ThemeContext";
 
-export default function Hero() {
+export default function HeroSection() {
+  const { mounted } = useTheme();
+ 
+  if (!mounted) {
+    return <div className="w-full min-h-[90vh] bg-[rgb(var(--color-background))]"></div>;
+  }
   return (
-    <section className="relative min-h-screen flex items-center">
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="bg-background-dark dark:opacity-100 opacity-5 w-full h-full absolute">
-          {/* Background overlay */}
-        </div>
-      </div>
-
-      <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-12">
-        <div className="flex justify-center lg:justify-start">
-          <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-4 border-primary-600 dark:border-primary-400">
-            <Image
-              src="/images/profile.jpg"
-              alt="Abhishek Swami"
-              fill
-              priority
-              sizes="(max-width: 768px) 16rem, 20rem"
-              className="object-cover"
-            />
+    <section className="w-full min-h-[90vh] py-16 md:py-24 bg-[rgb(var(--color-background))] text-[rgb(var(--color-text))]">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-8 items-center z-10">
+        {/* Left Content - Text */}
+        <div className="order-2 md:order-1 mt-10 md:mt-0">
+          {/* Subtle background circles */}
+          <div className="relative z-20">
+            <div className="absolute -top-20 -left-20 w-64 h-64 border border-gray-700 rounded-full opacity-30"></div>
+            <div className="absolute -top-10 -left-10 w-48 h-48 border border-gray-700 rounded-full opacity-30"></div>
+            <div className="absolute top-0 left-0 w-32 h-32 border border-gray-700 rounded-full opacity-30"></div>
           </div>
+
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 z-30">
+            Nice to meet you! I'm{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10">Abhishek Swami</span>
+              <span className="absolute bottom-0 left-0 w-full h-1 bg-[rgb(var(--color-primary-light))]"></span>
+            </span>
+          </h1>
+
+          <p className="text-lg md:text-xl text-gray-400 mb-8 max-w-lg z-20">
+            Based in India, I'm a full-stack developer passionate about building
+            accessible web apps that users love.
+          </p>
+
+          <a
+            href="#contact"
+            className="inline-block uppercase font-medium tracking-wider pb-2 border-b-2 border-[rgb(var(--color-primary-light))] hover:text-[rgb(var(--color-primary-light))] transition-colors"
+          >
+            Contact Me
+          </a>
         </div>
 
-        <div className="text-center lg:text-left">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
-            Hi, I am
-            <span className="text-primary-600 dark:text-primary-400"> 👋</span>
-          </h1>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-3">
-            Abhishek Swami
-          </h2>
-          <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-secondary-600 dark:text-secondary-300">
-            MERN |
-          </h3>
-
-          <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-            <Link href="/resume" className="btn-primary flex items-center">
-              <svg
-                className="w-5 h-5 mr-2"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
-              Resume
-            </Link>
-
-            <a
-              href="https://github.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-secondary-800 hover:bg-secondary-900 text-white font-medium py-2 px-4 rounded-md transition-colors duration-300 flex items-center"
-            >
-              <svg
-                className="w-5 h-5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-              </svg>
-            </a>
-
-            <a
-              href="https://linkedin.com/in/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#0077b5] hover:bg-[#00669c] text-white font-medium py-2 px-4 rounded-md transition-colors duration-300 flex items-center"
-            >
-              <svg
-                className="w-5 h-5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect x="2" y="9" width="4" height="12"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-              </svg>
-            </a>
+        {/* Right Content - Image */}
+        <div className="order-1 md:order-2 flex justify-center md:justify-end">
+          <div className="relative w-64 h-64 md:w-96 md:h-96 bg-white rounded-tr-2xl rounded-bl-2xl">
+            <Image
+              src={AbhiImage.src}
+              alt="Adil Rana"
+              fill
+              className="object-contain grayscale rounded-sm"
+              priority
+            />
+            {/* Pattern overlay */}
+            <div className="absolute -bottom-4 -right-4 w-full h-full border-b-2 border-r-2 border-[rgb(var(--color-primary-light))] opacity-40"></div>
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./styles/**/*.{css,scss,module.css,module.scss}",
   ],
   // Explicitly set darkMode to class for v4
   darkMode: 'class',
