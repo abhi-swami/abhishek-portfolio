@@ -94,66 +94,115 @@ const skills = [
 export default function SkillsSection() {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
-
-  // Prevent hydration mismatch
+  const [activeIndex, setActiveIndex] = useState(0);
+  const totalSkills = skills.length;
+  
   useEffect(() => {
     setMounted(true);
-  }, []);
-
+    
+    // Auto-rotate slides every 3 seconds
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % totalSkills);
+    }, 3000);
+    
+    return () => clearInterval(interval);
+  }, [totalSkills]);
+  
+  // Prevent SSR hydration issues
   if (!mounted) return null;
 
-  const isDarkMode = theme === "dark";
+  // Helper functions for navigation
+  const goToNext = () => {
+    setActiveIndex((prevIndex) => (prevIndex + 1) % totalSkills);
+  };
+  
+  const goToPrev = () => {
+    setActiveIndex((prevIndex) => (prevIndex - 1 + totalSkills) % totalSkills);
+  };
+  
+  const goToSlide = (index) => {
+    setActiveIndex(index);
+  };
+  
+  // Helper to get slide class based on position relative to active
+  const getSlideClass = (index) => {
+    // Calculate position relative to active index
+    const position = (index - activeIndex + totalSkills) % totalSkills;
+    
+    if (position === 0) return styles.slideActive;
+    if (position === 1 || position === totalSkills - 1) return position === 1 ? styles.slideNext : styles.slidePrev;
+    if (position === 2 || position === totalSkills - 2) return position === 2 ? styles.slideFarNext : styles.slideFarPrev;
+    return '';
+  };
 
   return (
     <section id="skills" className={styles.skillsSection}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section heading with underline */}
+        {/* Section heading */}
         <div className="mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[rgb(var(--color-text))]">
-            <span className={styles.sectionHeading}>Skills & Technologies</span>
+            <span className={styles.sectionHeading}>
+            Tech Tools
+            </span>
           </h2>
           <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
             Technologies I've been working with recently
           </p>
         </div>
-
-        {/* Skills grid with glass effect */}
-        <div className="relative">
-          {/* Glass container */}
-          <div
-            className={`${styles.glassContainer} bg-[rgb(var(--color-background))] p-6 shadow-xl`}
-          >
-            {/* Skills grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
-              {skills.map((skill, index) => {
-                const IconComponent = SkillIcons[skill.icon];
-
-                return (
-                  <div key={index} className={`${styles.skillCard}`}>
-                    <div
-                      className={`${
-                        styles.iconContainer
-                      }  bg-[rgb(var(--color-nav))] shadow-md shadow-[rgb(var(--color-primary-light))]   border-1 dark:border-0 border-[rgb(var(--color-primary-light))] rounded-xl p-4 
-                                      ${
-                                        skill.icon === "GitHub" ||
-                                        skill.icon === "Express"
-                                          ? "no-hover-effect"
-                                          : ""
-                                      }`}
-                    >
-                      <IconComponent
-                        className={`${styles.iconSvg} ${
-                          styles[skill.icon.toLowerCase()]
-                        }`}
-                      />
-                    </div>
-                    <p className="text-center text-sm md:text-base font-medium text-[rgb(var(--color-text))]">
-                      {skill.text}
-                    </p>
+        
+        {/* Slider */}
+        <div className={styles.sliderWrapper}>
+          <div className={styles.sliderContainer}>
+            {skills.map((skill, index) => {
+              const IconComponent = SkillIcons[skill.icon];
+              const slideClass = getSlideClass(index);
+              
+              // Only render if slide is visible (active, prev, next, or far prev/next)
+              if (!slideClass) return null;
+              
+              return (
+                <div
+                  key={index}
+                  className={`${styles.slideCard} ${slideClass}`}
+                  onClick={() => goToSlide(index)}
+                >
+                  <div className={styles.iconContainer}>
+                    <IconComponent
+                      className={`${styles.iconSvg} ${styles[skill.icon.toLowerCase()]}`}
+                    />
                   </div>
-                );
-              })}
-            </div>
+                  <div className={styles.skillName}>{skill.text}</div>
+                </div>
+              );
+            })}
+            
+            {/* Navigation buttons */}
+            <button
+              className={`${styles.navButton} ${styles.prevButton}`}
+              onClick={goToPrev}
+              aria-label="Previous skill"
+            >
+              &#8249;
+            </button>
+            <button
+              className={`${styles.navButton} ${styles.nextButton}`}
+              onClick={goToNext}
+              aria-label="Next skill"
+            >
+              &#8250;
+            </button>
+          </div>
+          
+          {/* Indicators */}
+          <div className={styles.indicators}>
+            {skills.map((_, index) => (
+              <button
+                key={index}
+                className={`${styles.indicator} ${index === activeIndex ? styles.indicatorActive : ''}`}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>
