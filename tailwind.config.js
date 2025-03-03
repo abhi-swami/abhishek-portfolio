@@ -9,8 +9,8 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./styles/**/*.{css,scss,module.css,module.scss}",
   ],
-  // Explicitly set darkMode to class for v4
-  darkMode: 'class',
+  // Remove or set to 'media' if you don't need class-based toggling anymore
+  // darkMode: 'class',
   theme: {
     extend: {
       animation: {
@@ -26,32 +26,16 @@ module.exports = {
         }
       },
       colors: {
+        // Define dark mode colors directly without CSS variables
         primary: {
-          light: 'rgb(var(--color-primary-light) / <alpha-value>)',
-          DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
-          dark: 'rgb(var(--color-primary-dark) / <alpha-value>)',
+          light: 'rgb(55, 213, 190)',
+          DEFAULT: 'rgb(250, 250, 250)',
+          dark: 'rgb(72, 61, 139)',
         },
-        secondary: {
-          light: 'rgb(var(--color-secondary-light) / <alpha-value>)',
-          DEFAULT: 'rgb(var(--color-secondary) / <alpha-value>)',
-          dark: 'rgb(var(--color-secondary-dark) / <alpha-value>)',
-        },
-        background: {
-          light: 'rgb(var(--color-background-light) / <alpha-value>)',
-          dark: 'rgb(var(--color-background-dark) / <alpha-value>)',
-        },
-        text: {
-          light: 'rgb(var(--color-text-light) / <alpha-value>)',
-          dark: 'rgb(var(--color-text-dark) / <alpha-value>)',
-        },
-        card: {
-          light: 'rgb(var(--color-card-light) / <alpha-value>)',
-          dark: 'rgb(var(--color-card-dark) / <alpha-value>)',
-        },
-        nav: {
-          light: 'rgb(var(--color-nav-light) / <alpha-value>)',
-          dark: 'rgb(var(--color-nav-dark) / <alpha-value>)',
-        }
+        background: 'rgb(31, 31, 31)',
+        text: 'rgb(248, 248, 248)',
+        card: 'rgb(30, 30, 30)',
+        nav: 'rgb(21, 21, 21)',
       },
     },
   },

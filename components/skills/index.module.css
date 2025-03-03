@@ -1,49 +1,9 @@
-/* skills.module.css */
-
-.skillsSection {
-  width: 100%;
-  padding: 5rem 0;
-  background-color: rgb(var(--color-background));
-}
-
-.sectionHeading {
-  position: relative;
-  display: inline-block;
-}
-
-.sectionHeading::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background-color: rgb(var(--color-primary-light));
-}
-
-/* Slider container and controls */
-.sliderWrapper {
-  position: relative;
-  margin: 3rem auto;
-  max-width: 1200px;
-  overflow: hidden;
-}
-
-.sliderContainer {
-  position: relative;
-  width: 100%;
-  height: 350px;
-  display: flex;
-  justify-content:space-around;
-  align-items: center;
-}
-
-/* Individual slides */
+/* The core slide position and transition classes */
 .slideCard {
   position: absolute;
   width: 200px;
   height: 200px;
-  background: rgb(var(--color-nav));
+  background: rgb(30, 30, 30);
   border-radius: 10px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -63,7 +23,7 @@
   opacity: 1;
   transform: scale(1) translateX(0);
   z-index: 5;
-  box-shadow: 0 10px 30px rgba(var(--color-primary-light), 0.3);
+  box-shadow: 0 10px 30px rgba(55, 213, 190, 0.3);
 }
 
 /* Previous and next slides */
@@ -92,91 +52,7 @@
   z-index: 3;
 }
 
-/* Icon styling */
-.iconContainer {
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-}
-
-.skillName {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: rgb(var(--color-text));
-  margin-top: 0.5rem;
-  text-align: center;
-}
-
-/* Navigation buttons */
-.navButton {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  background: rgb(var(--color-nav));
-  border: none;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  cursor: pointer;
-  z-index: 10;
-  color: rgb(var(--color-text));
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.navButton:hover {
-  background: rgb(var(--color-primary-light));
-  color: white;
-}
-
-.prevButton {
-  left: 20px;
-}
-
-.nextButton {
-  right: 20px;
-}
-
-/* Indicator dots */
-.indicators {
-  display: flex;
-  justify-content: center;
-  margin-top: 1.5rem;
-  gap: 8px;
-}
-
-.indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(var(--color-text), 0.3);
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.indicatorActive {
-  background: rgb(var(--color-primary-light));
-  transform: scale(1.2);
-}
-
-/* Icon SVG styles */
-.iconSvg {
-  width: 100%;
-  height: 100%;
-  transition: all 0.3s ease;
-}
-
-/* Different colors for different icons */
+/* Icon color classes */
 .html { color: #E44D26; }
 .css { color: #264DE4; }
 .javascript { color: #F7DF1E; }
@@ -196,38 +72,14 @@
 
 /* Special treatment for GitHub - inverted colors */
 .github {
-  color: black !important;
-  background-color: white;
+  color: white !important;
+  background-color: black;
   border-radius: 50%;
   padding: 2px;
 }
 
-:global(.dark) .github {
-  color: white !important;
-  background-color: black;
-}
-
-/* Dark mode - Grayscale with hover effect for other icons */
-:global(.dark) .iconSvg:not(.express):not(.github) {
-  filter: grayscale(1) brightness(1.75);
-}
-
-:global(.dark) .slideActive .iconSvg:not(.express):not(.github) {
-  filter: grayscale(0);
-}
-
-/* Responsive styles */
+/* Responsive layout adjustments */
 @media (max-width: 768px) {
-  .slideCard {
-    width: 240px;
-    height: 240px;
-  }
-  
-  .iconContainer {
-    width: 70px;
-    height: 70px;
-  }
-  
   .slidePrev {
     transform: scale(0.85) translateX(-80%);
   }
@@ -246,20 +98,6 @@
 }
 
 @media (max-width: 480px) {
-  .sliderContainer {
-    height: 300px;
-  }
-  
-  .slideCard {
-    width: 200px;
-    height: 200px;
-  }
-  
-  .iconContainer {
-    width: 60px;
-    height: 60px;
-  }
-  
   .slidePrev {
     transform: scale(0.8) translateX(-70%);
   }

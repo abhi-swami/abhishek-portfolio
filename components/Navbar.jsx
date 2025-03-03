@@ -1,19 +1,9 @@
-// components/Navbar.js
-'use client';
-
 import Link from 'next/link';
 import { useState } from 'react';
-import ThemeToggle from './ThemeToggle';
-import { useTheme } from '../context/ThemeContext';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { mounted } = useTheme();
 
-  // Don't render full navbar during SSR to prevent hydration issues
-  if (!mounted) {
-    return <div className="h-20 bg-[rgb(var(--color-nav))]"></div>;
-  }
 
   return (
     <nav className="w-full py-6 px-4 md:px-8 bg-[rgb(var(--color-background))] text-[rgb(var(--color-text))]">
@@ -42,12 +32,10 @@ export default function Navbar() {
               </svg>
             </a>
           </div>
-          <ThemeToggle />
         </div>
 
         {/* Mobile menu button */}
         <div className="md:hidden flex items-center space-x-4">
-          <ThemeToggle />
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="focus:outline-none"
@@ -72,7 +60,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden mt-4 py-4 border-t border-gray-700">
+        <div className="md:hidden mt-4 py-4 ">
           <div className="flex flex-col space-y-4 items-center">
             <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="hover:text-[rgb(var(--color-primary-light))] transition-colors">GitHub</a>
             <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="hover:text-[rgb(var(--color-primary-light))] transition-colors">LinkedIn</a>
