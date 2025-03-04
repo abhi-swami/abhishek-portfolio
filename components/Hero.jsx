@@ -11,7 +11,7 @@ const prompt = Prompt({
 
 export default function HeroSection() {
   return (
-    <section className="w-full border py-4 xs:py-4 sm:py-8 md:py-10 lg:py-12 overflow-hidden">
+    <section className="w-full py-4 xs:py-4 sm:py-8 md:py-10 lg:py-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 md:px-8 grid md:grid-cols-2 gap-3 xs:gap-4 sm:gap-6 md:gap-8 items-center z-10">
         {/* Left Content - Text */}
         <div className="order-2 md:order-1 mt-6 xs:mt-8 sm:mt-10 md:mt-0">
