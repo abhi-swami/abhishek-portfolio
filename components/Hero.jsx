@@ -1,7 +1,6 @@
 // components/HeroSection.js
 import Image from "next/image";
 import AbhiImage from "../public/abh-image.png";
-import { useTheme } from "@/context/ThemeContext";
 import { Geist_Mono, Prompt } from "next/font/google";
 
 const geistMono = Geist_Mono({
@@ -18,13 +17,9 @@ const prompt = Prompt({
 
 
 export default function HeroSection() {
-  const { mounted } = useTheme();
- 
-  if (!mounted) {
-    return <div className="w-full min-h-[70vh] bg-[rgb(var(--color-background))]"></div>;
-  }
+
   return (
-    <section className="w-full border py-4 md:py-12 bg-[rgb(var(--color-background))] text-[rgb(var(--color-text))] overflow-hidden">
+    <section className="w-full border py-4 md:py-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-4 md:gap-8 items-center z-10">
         {/* Left Content - Text */}
         <div className="order-2 md:order-1 mt-10 md:mt-0">
@@ -43,7 +38,7 @@ export default function HeroSection() {
             </span>
           </h1>
 
-          <p className="text-lg md:text-xl text-[rgb(var(--color-primary))] mb-4 md:mb-8 max-w-lg z-20 pt-4 relative">
+          <p className="text-lg md:text-xl text-[rgb(var(--color-text-secondary))] mb-4 md:mb-8 max-w-lg z-20 pt-4 relative">
           Let's build something so good
           </p>
 

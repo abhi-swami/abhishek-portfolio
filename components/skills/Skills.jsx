@@ -129,16 +129,16 @@ export default function SkillsSection() {
   };
 
   return (
-    <section id="skills" className="w-full py-20 bg-[rgb(var(--color-background))]">
+    <section id="skills" className="w-full py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section heading */}
         <div className="mb-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-[rgb(var(--color-text))]">
+          <h2 className="text-3xl md:text-4xl font-bold">
             <span className="relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-primary-light">
               Tech Tools
             </span>
           </h2>
-          <p className="mt-4 text-lg text-gray-400">
+          <p className="mt-4 text-lg text-[rgb(var(--color-text-secondary))]">
             Technologies I've been working with recently
           </p>
         </div>
@@ -166,21 +166,21 @@ export default function SkillsSection() {
                       className={`w-full h-full transition-all duration-300 ${activeIndex===index ?styles[skill.icon.toLowerCase()]: ""}`}
                     />
                   </div>
-                  <div className="text-lg font-semibold text-[rgb(var(--color-text))] mt-2 text-center">{skill.text}</div>
+                  <div className="text-lg font-semibold  mt-2 text-center">{skill.text}</div>
                 </div>
               );
             })}
             
             {/* Navigation buttons */}
             <button
-              className="hidden absolute top-1/2 left-5 -translate-y-1/2 w-10 h-10 bg-nav rounded-full md:flex items-center justify-center text-2xl text-[rgb(var(--color-text))] shadow-md hover:bg-primary-light hover:text-white transition-all duration-300 z-10"
+              className="hidden absolute top-1/2 left-5 -translate-y-1/2 w-10 h-10 bg-nav rounded-full md:flex items-center justify-center text-2xl text-[rgb(var(--color-text-primary))] shadow-md hover:bg-primary-light hover:text-white transition-all duration-300 z-10"
               onClick={goToPrev}
               aria-label="Previous skill"
             >
               &#8249;
             </button>
             <button
-              className="hidden absolute top-1/2 right-5 -translate-y-1/2 w-10 h-10 bg-nav rounded-full md:flex items-center justify-center text-2xl text-[rgb(var(--color-text))] shadow-md hover:bg-primary-light hover:text-white transition-all duration-300 z-10"
+              className="hidden absolute top-1/2 right-5 -translate-y-1/2 w-10 h-10 bg-nav rounded-full md:flex items-center justify-center text-2xl text-[rgb(var(--color-text-primary))] shadow-md hover:bg-primary-light hover:text-white transition-all duration-300 z-10"
               onClick={goToNext}
               aria-label="Next skill"
             >
@@ -196,7 +196,7 @@ export default function SkillsSection() {
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                   index === activeIndex 
                     ? 'bg-[rgb(var(--color-primary-light))] scale-110' 
-                    : 'bg-gray-500 bg-opacity-30'
+                    : 'bg-[rgb(var(--color-text-primary))] bg-opacity-30'
                 }`}
                 onClick={() => goToSlide(index)}
                 aria-label={`Go to slide ${index + 1}`}

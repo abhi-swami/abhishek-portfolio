@@ -7,7 +7,8 @@
     --color-primary-dark: 72, 61, 139;
 
     --color-background: 31, 31, 31;
-    --color-text: 248, 248, 248;
+    --color-text-primary: 248, 248, 248;
+    --color-text-secondary: 248, 249, 250;
     --color-card: 30, 30, 30;
     --color-nav: 21, 21, 21;
   }

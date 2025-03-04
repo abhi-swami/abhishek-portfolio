@@ -6,7 +6,7 @@ export default function Navbar() {
 
 
   return (
-    <nav className="w-full py-6 px-4 md:px-8 bg-[rgb(var(--color-background))] text-[rgb(var(--color-text))]">
+    <nav className="w-full py-6 px-4 md:px-8 ">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="text-xl md:text-2xl font-bold tracking-wider">

@@ -13,6 +13,14 @@ module.exports = {
   // darkMode: 'class',
   theme: {
     extend: {
+      screens:{
+        xs: '320px',
+        sm: '578px',
+        md: '768px',
+        lg: '992px',
+        xl: '1200px',
+        '2xl': '1536px',
+      },
       animation: {
         'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'twinkle': 'twinkle 3s ease-in-out infinite',
@@ -24,18 +32,6 @@ module.exports = {
           '0%, 100%': { opacity: 1 },
           '50%': { opacity: 0.3 },
         }
-      },
-      colors: {
-        // Define dark mode colors directly without CSS variables
-        primary: {
-          light: 'rgb(55, 213, 190)',
-          DEFAULT: 'rgb(250, 250, 250)',
-          dark: 'rgb(72, 61, 139)',
-        },
-        background: 'rgb(31, 31, 31)',
-        text: 'rgb(248, 248, 248)',
-        card: 'rgb(30, 30, 30)',
-        nav: 'rgb(21, 21, 21)',
       },
     },
   },
