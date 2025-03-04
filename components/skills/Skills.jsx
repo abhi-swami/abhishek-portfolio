@@ -144,7 +144,7 @@ export default function SkillsSection() {
         </div>
         
         {/* Slider */}
-        <div className="relative mx-auto md:my-8 max-w-6xl overflow-hidden border">
+        <div className="relative mx-auto md:my-6 max-w-6xl overflow-hidden">
           <div className="relative w-full h-[350px] flex justify-center items-center">
             {skills.map((skill, index) => {
               const IconComponent = SkillIcons[skill.icon];
@@ -163,7 +163,7 @@ export default function SkillsSection() {
                 >
                   <div className="w-20 h-20 flex items-center justify-center mb-6">
                     <IconComponent
-                      className={`w-full h-full transition-all duration-300 ${activeIndex===index ?styles[skill.icon.toLowerCase()]: ""}`}
+                      className={`w-full h-full transition-all duration-300 ${activeIndex===index ? styles[skill.icon.toLowerCase()]: ""}`}
                     />
                   </div>
                   <div className="text-lg font-semibold  mt-2 text-center">{skill.text}</div>

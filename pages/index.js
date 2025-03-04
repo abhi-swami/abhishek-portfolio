@@ -11,7 +11,7 @@ const inter = Inter({ weight: "400", subsets: ['latin'] })
 export default function Home() {
   return (
     <div
-      className={`${inter.className} min-h-screen bg-[rgb(var(--color-background))] text-[rgb(var(--color-text-primary))] `}
+      className={`${inter.className} min-h-screen bg-[rgb(var(--color-background-light))] text-[rgb(var(--color-text-primary))] `}
     >
       <Navbar />
       <HeroSection/>
