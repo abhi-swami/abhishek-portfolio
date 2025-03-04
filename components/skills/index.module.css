@@ -1,18 +1,18 @@
-/* Mobile-first base styles */
+/* Mobile-first base styles - starting from 320px */
 .slideCard {
   position: absolute;
-  width: 150px; /* Smaller by default for mobile */
-  height: 150px;
+  width: 120px;
+  height: 120px;
   background: rgb(30, 30, 30);
-  border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   transition: all 0.5s ease;
   cursor: pointer;
-  padding: 1rem;
+  padding: 0.75rem;
   z-index: 1;
   opacity: 0;
   transform: scale(0.8) translateX(100%);
@@ -29,32 +29,32 @@
 /* Previous and next slides - Mobile first */
 .slidePrev {
   opacity: 0.7;
-  transform: scale(0.85) translateX(-65%);
+  transform: scale(0.85) translateX(-60%);
   z-index: 4;
 }
 
 .slideNext {
   opacity: 0.7;
-  transform: scale(0.85) translateX(65%);
+  transform: scale(0.85) translateX(60%);
   z-index: 4;
 }
 
 /* Far slides - Hidden on smallest screens by default */
 .slideFarPrev {
   opacity: 0;
-  transform: scale(0.7) translateX(-120%);
+  transform: scale(0.7) translateX(-100%);
   z-index: 3;
   display: none;
 }
 
 .slideFarNext {
   opacity: 0;
-  transform: scale(0.7) translateX(120%);
+  transform: scale(0.7) translateX(100%);
   z-index: 3;
   display: none;
 }
 
-/* Icon color classes stay the same */
+/* Icon color classes - unchanged */
 .html { color: #E44D26; }
 .css { color: #264DE4; }
 .javascript { color: #F7DF1E; }
@@ -74,77 +74,83 @@
   padding: 2px;
 }
 
-/* Small phones (>= 360px) */
-@media (min-width: 360px) {
+/* Extra small devices (>= 320px) - Your xs breakpoint */
+@media (min-width: 320px) {
+  .slideCard {
+    width: 135px;
+    height: 135px;
+    border-radius: 8px;
+  }
+  
   .slidePrev {
-    transform: scale(0.85) translateX(-70%);
+    transform: scale(0.85) translateX(-65%);
   }
   
   .slideNext {
-    transform: scale(0.85) translateX(70%);
+    transform: scale(0.85) translateX(65%);
   }
 }
 
-/* Medium-sized phones (>= 480px) */
-@media (min-width: 480px) {
+/* Small devices (>= 578px) - Your sm breakpoint */
+@media (min-width: 578px) {
   .slideCard {
-    width: 170px;
-    height: 170px;
-    padding: 1.25rem;
+    width: 160px;
+    height: 160px;
+    padding: 1rem;
+    border-radius: 10px;
   }
   
   .slidePrev {
-    transform: scale(0.85) translateX(-75%); 
+    transform: scale(0.85) translateX(-75%);
   }
   
   .slideNext {
     transform: scale(0.85) translateX(75%);
   }
-}
-
-/* Tablets (>= 578px) - Show far slides */
-@media (min-width: 578px) {
+  
   .slideFarPrev, .slideFarNext {
     display: flex;
-    opacity: 0.5;
+    opacity: 0.7;
   }
   
   .slideFarPrev {
-    transform: scale(0.7) translateX(-140%);
+    transform: scale(0.7) translateX(-130%);
   }
   
   .slideFarNext {
-    transform: scale(0.7) translateX(140%);
+    transform: scale(0.7) translateX(130%);
   }
 }
 
-/* Medium tablets (>= 768px) */
+/* Medium devices (>= 768px) - Your md breakpoint */
 @media (min-width: 768px) {
   .slideCard {
     width: 180px;
     height: 180px;
+    padding: 1.25rem;
   }
   
   .slidePrev {
-    transform: scale(0.85) translateX(-85%);
+    transform: scale(0.9) translateX(-80%);
   }
   
   .slideNext {
-    transform: scale(0.85) translateX(85%);
+    transform: scale(0.9) translateX(80%);
+    
   }
   
   .slideFarPrev {
+    transform: scale(0.75) translateX(-150%);
     display: flex;
-    transform: scale(0.75) translateX(-160%);
   }
   
   .slideFarNext {
+    transform: scale(0.75) translateX(150%);
     display: flex;
-    transform: scale(0.75) translateX(160%);
   }
 }
 
-/* Laptops (>= 992px) */
+/* Large devices (>= 992px) - Your lg breakpoint */
 @media (min-width: 992px) {
   .slideCard {
     width: 200px;
@@ -161,10 +167,29 @@
   }
   
   .slideFarPrev {
-    transform: scale(0.8) translateX(-175%);
+    transform: scale(0.8) translateX(-170%);
   }
   
   .slideFarNext {
-    transform: scale(0.8) translateX(175%);
+    transform: scale(0.8) translateX(170%);
+  }
+}
+
+/* Extra large devices (>= 1200px) - Your xl breakpoint */
+@media (min-width: 1200px) {
+  .slidePrev {
+    transform: scale(0.9) translateX(-95%);
+  }
+  
+  .slideNext {
+    transform: scale(0.9) translateX(95%);
+  }
+  
+  .slideFarPrev {
+    transform: scale(0.8) translateX(-180%);
+  }
+  
+  .slideFarNext {
+    transform: scale(0.8) translateX(180%);
   }
 }
