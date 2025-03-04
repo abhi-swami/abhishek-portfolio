@@ -1,8 +1,8 @@
-/* The core slide position and transition classes */
+/* Mobile-first base styles */
 .slideCard {
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 150px; /* Smaller by default for mobile */
+  height: 150px;
   background: rgb(30, 30, 30);
   border-radius: 10px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -12,7 +12,7 @@
   justify-content: center;
   transition: all 0.5s ease;
   cursor: pointer;
-  padding: 1.5rem;
+  padding: 1rem;
   z-index: 1;
   opacity: 0;
   transform: scale(0.8) translateX(100%);
@@ -26,33 +26,35 @@
   box-shadow: 0 5px 15px rgba(55, 213, 190, 0.3);
 }
 
-/* Previous and next slides */
+/* Previous and next slides - Mobile first */
 .slidePrev {
   opacity: 0.7;
-  transform: scale(0.9) translateX(-90%);
+  transform: scale(0.85) translateX(-65%);
   z-index: 4;
 }
 
 .slideNext {
   opacity: 0.7;
-  transform: scale(0.9) translateX(90%);
+  transform: scale(0.85) translateX(65%);
   z-index: 4;
 }
 
-/* Far slides (only shown if we have enough) */
+/* Far slides - Hidden on smallest screens by default */
 .slideFarPrev {
-  opacity: 0.7;
-  transform: scale(0.8) translateX(-175%);
+  opacity: 0;
+  transform: scale(0.7) translateX(-120%);
   z-index: 3;
+  display: none;
 }
 
 .slideFarNext {
-  opacity: 0.7;
-  transform: scale(0.8) translateX(175%);
+  opacity: 0;
+  transform: scale(0.7) translateX(120%);
   z-index: 3;
+  display: none;
 }
 
-/* Icon color classes */
+/* Icon color classes stay the same */
 .html { color: #E44D26; }
 .css { color: #264DE4; }
 .javascript { color: #F7DF1E; }
@@ -64,13 +66,7 @@
 .mongodb { color: #47A248; }
 .npm { color: #CB3837; }
 .vscode { color: #007ACC; }
-
-/* Special treatment for Express - always white */
-.express { 
-  color: white !important;
-}
-
-/* Special treatment for GitHub - inverted colors */
+.express { color: white !important; }
 .github {
   color: white !important;
   background-color: black;
@@ -78,35 +74,95 @@
   padding: 2px;
 }
 
-/* Responsive layout adjustments */
-@media (max-width: 768px) {
+/* Small phones (>= 360px) */
+@media (min-width: 360px) {
   .slidePrev {
-    transform: scale(0.85) translateX(-80%);
+    transform: scale(0.85) translateX(-70%);
   }
   
   .slideNext {
-    transform: scale(0.85) translateX(80%);
-  }
-  
-  .slideFarPrev {
-    transform: scale(0.75) translateX(-150%);
-  }
-  
-  .slideFarNext {
-    transform: scale(0.75) translateX(150%);
+    transform: scale(0.85) translateX(70%);
   }
 }
 
-@media (max-width: 480px) {
+/* Medium-sized phones (>= 480px) */
+@media (min-width: 480px) {
+  .slideCard {
+    width: 170px;
+    height: 170px;
+    padding: 1.25rem;
+  }
+  
   .slidePrev {
-    transform: scale(0.8) translateX(-70%);
+    transform: scale(0.85) translateX(-75%); 
   }
   
   .slideNext {
-    transform: scale(0.8) translateX(70%);
+    transform: scale(0.85) translateX(75%);
+  }
+}
+
+/* Tablets (>= 578px) - Show far slides */
+@media (min-width: 578px) {
+  .slideFarPrev, .slideFarNext {
+    display: block;
+    opacity: 0.5;
   }
   
-  .slideFarPrev, .slideFarNext {
-    display: none;
+  .slideFarPrev {
+    transform: scale(0.7) translateX(-140%);
+  }
+  
+  .slideFarNext {
+    transform: scale(0.7) translateX(140%);
+  }
+}
+
+/* Medium tablets (>= 768px) */
+@media (min-width: 768px) {
+  .slideCard {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .slidePrev {
+    transform: scale(0.85) translateX(-85%);
+  }
+  
+  .slideNext {
+    transform: scale(0.85) translateX(85%);
+  }
+  
+  .slideFarPrev {
+    transform: scale(0.75) translateX(-160%);
+  }
+  
+  .slideFarNext {
+    transform: scale(0.75) translateX(160%);
+  }
+}
+
+/* Laptops (>= 992px) */
+@media (min-width: 992px) {
+  .slideCard {
+    width: 200px;
+    height: 200px;
+    padding: 1.5rem;
+  }
+  
+  .slidePrev {
+    transform: scale(0.9) translateX(-90%);
+  }
+  
+  .slideNext {
+    transform: scale(0.9) translateX(90%);
+  }
+  
+  .slideFarPrev {
+    transform: scale(0.8) translateX(-175%);
+  }
+  
+  .slideFarNext {
+    transform: scale(0.8) translateX(175%);
   }
 }

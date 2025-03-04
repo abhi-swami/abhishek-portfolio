@@ -92,9 +92,6 @@ export default function SkillsSection() {
   const totalSkills = skills.length;
   
   useEffect(() => {
-
-    
-    // Auto-rotate slides every 3 seconds
     const interval = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % totalSkills);
     }, 3000);
@@ -102,9 +99,6 @@ export default function SkillsSection() {
     return () => clearInterval(interval);
   }, [totalSkills]);
   
-
-
-  // Helper functions for navigation
   const goToNext = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % totalSkills);
   };
@@ -117,9 +111,7 @@ export default function SkillsSection() {
     setActiveIndex(index);
   };
   
-  // Helper to get slide class based on position relative to active
   const getSlideClass = (index) => {
-    // Calculate position relative to active index
     const position = (index - activeIndex + totalSkills) % totalSkills;
     
     if (position === 0) return styles.slideActive;
@@ -129,30 +121,27 @@ export default function SkillsSection() {
   };
 
   return (
-    <section id="skills" className="w-full py-12">
+    <section id="skills" className="w-full py-8 md:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section heading */}
-        <div className="mb-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold">
+        <div className="xs:mb-4 sm:mb-6 md:mb-8 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
             <span className="relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-primary-light">
               Tech Tools
             </span>
           </h2>
-          <p className="mt-4 text-lg text-[rgb(var(--color-text-secondary))]">
+          <p className="mt-3 md:mt-4 text-base sm:text-lg text-[rgb(var(--color-text-secondary))]">
             Technologies I've been working with recently
           </p>
         </div>
         
         {/* Slider */}
-        <div className="relative mx-auto md:my-6 max-w-6xl overflow-hidden">
-          <div className="relative w-full h-[350px] flex justify-center items-center">
+        <div className="relative mx-auto my-4 md:my-6 max-w-6xl overflow-hidden">
+          <div className="relative w-full h-[250px] sm:h-[300px] md:h-[350px] flex justify-center items-center">
             {skills.map((skill, index) => {
               const IconComponent = SkillIcons[skill.icon];
               const slideClass = getSlideClass(index);
-
-              console.log(slideClass);
               
-              // Only render if slide is visible (active, prev, next, or far prev/next)
               if (!slideClass) return null;
               
               return (
@@ -161,26 +150,26 @@ export default function SkillsSection() {
                   className={`${styles.slideCard} ${slideClass}`}
                   onClick={() => goToSlide(index)}
                 >
-                  <div className="w-20 h-20 flex items-center justify-center mb-6">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 flex items-center justify-center mb-3 sm:mb-4 md:mb-6">
                     <IconComponent
                       className={`w-full h-full transition-all duration-300 ${activeIndex===index ? styles[skill.icon.toLowerCase()]: ""}`}
                     />
                   </div>
-                  <div className="text-lg font-semibold  mt-2 text-center">{skill.text}</div>
+                  <div className="text-sm sm:text-base md:text-lg font-semibold mt-1 md:mt-2 text-center">{skill.text}</div>
                 </div>
               );
             })}
             
             {/* Navigation buttons */}
             <button
-              className="hidden absolute top-1/2 left-5 -translate-y-1/2 w-10 h-10 bg-nav rounded-full md:flex items-center justify-center text-2xl text-[rgb(var(--color-text-primary))] shadow-md hover:bg-primary-light hover:text-white transition-all duration-300 z-10"
+              className="hidden absolute top-1/2 left-2 sm:left-5 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 bg-nav rounded-full sm:flex items-center justify-center text-xl sm:text-2xl shadow-md hover:bg-primary-light hover:text-white transition-all duration-300 z-10"
               onClick={goToPrev}
               aria-label="Previous skill"
             >
               &#8249;
             </button>
             <button
-              className="hidden absolute top-1/2 right-5 -translate-y-1/2 w-10 h-10 bg-nav rounded-full md:flex items-center justify-center text-2xl text-[rgb(var(--color-text-primary))] shadow-md hover:bg-primary-light hover:text-white transition-all duration-300 z-10"
+              className="hidden absolute top-1/2 right-2 sm:right-5 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 bg-nav rounded-full sm:flex items-center justify-center text-xl sm:text-2xl text-[rgb(var(--color-text-primary))] shadow-md hover:bg-primary-light hover:text-white transition-all duration-300 z-10"
               onClick={goToNext}
               aria-label="Next skill"
             >
@@ -189,11 +178,11 @@ export default function SkillsSection() {
           </div>
           
           {/* Indicators */}
-          <div className="flex justify-center my-3 gap-2">
+          <div className="flex justify-center my-2 sm:my-3 gap-1.5 sm:gap-2">
             {skills.map((_, index) => (
               <button
                 key={index}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-300 ${
                   index === activeIndex 
                     ? 'bg-[rgb(var(--color-primary-light))] scale-110' 
                     : 'bg-[rgb(var(--color-text-primary))] bg-opacity-30'
