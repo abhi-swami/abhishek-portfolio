@@ -1,12 +1,8 @@
 // components/HeroSection.js
 import Image from "next/image";
 import AbhiImage from "../public/abh-image.png";
-import { Geist_Mono, Prompt } from "next/font/google";
+import { Prompt } from "next/font/google";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const prompt = Prompt({
   variable: "--font-prompt",

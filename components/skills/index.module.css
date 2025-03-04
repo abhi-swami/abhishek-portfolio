@@ -105,7 +105,7 @@
 /* Tablets (>= 578px) - Show far slides */
 @media (min-width: 578px) {
   .slideFarPrev, .slideFarNext {
-    display: block;
+    display: flex;
     opacity: 0.5;
   }
   
@@ -134,10 +134,12 @@
   }
   
   .slideFarPrev {
+    display: flex;
     transform: scale(0.75) translateX(-160%);
   }
   
   .slideFarNext {
+    display: flex;
     transform: scale(0.75) translateX(160%);
   }
 }
