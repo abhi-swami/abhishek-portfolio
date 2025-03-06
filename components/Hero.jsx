@@ -14,7 +14,7 @@ export default function HeroSection() {
     <section className="w-full py-4 xs:py-4 sm:py-8 md:py-10 lg:py-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 md:px-8 grid md:grid-cols-2 gap-3 xs:gap-4 sm:gap-6 md:gap-8 items-center z-10">
         {/* Left Content - Text */}
-        <div className="order-2 md:order-1 mt-6 xs:mt-8 sm:mt-10 md:mt-0">
+        <div className="order-2 md:order-1 mt-6 xs:mt-8 sm:mt-10 md:mt-0 text-center md:text-left">
           {/* Subtle background circles */}
           <div className="relative z-20">
             <div className="absolute -top-10 xs:-top-12 sm:-top-16 md:-top-20 -left-10 xs:-left-12 sm:-left-16 md:-left-20 w-32 xs:w-40 sm:w-48 md:w-64 h-32 xs:h-40 sm:h-48 md:h-64 border border-gray-700 rounded-full opacity-30"></div>
@@ -30,7 +30,7 @@ export default function HeroSection() {
             </span>
           </h1>
 
-          <p className="text-sm xs:text-base sm:text-lg md:text-xl text-[rgb(var(--color-text-secondary))] mb-3 xs:mb-4 sm:mb-6 md:mb-8 max-w-lg z-20 pt-2 xs:pt-3 sm:pt-4 relative">
+          <p className="text-sm xs:text-base sm:text-lg md:text-xl text-[rgb(var(--color-text-secondary))] mb-2 xs:mb-2 sm:mb-6 md:mb-8 max-w-lg z-20 pt-2 xs:pt-4 sm:pt-4 relative">
             Let's build something so good
           </p>
 

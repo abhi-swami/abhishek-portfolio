@@ -7,7 +7,7 @@ export default function Navbar() {
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (isMenuOpen && !event.target.closest('nav')) {
+      if (isMenuOpen && !event.target.closest('nav') && !event.target.closest('.mobile-menu')) {
         setIsMenuOpen(false);
       }
     };
@@ -33,7 +33,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="w-full py-3 xs:py-4 sm:py-5 md:py-6 px-3 xs:px-4 sm:px-6 md:px-8 relative z-50">
+      <nav className="w-full py-3 xs:py-4 sm:py-5 md:py-6 px-3 xs:px-4 sm:px-6 md:px-8 relative z-60">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="text-lg xs:text-xl sm:text-xl md:text-2xl font-bold tracking-wider">
@@ -102,10 +102,10 @@ export default function Navbar() {
           {/* Four-dot Hamburger Button */}
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden flex items-center justify-center p-1.5 focus:outline-none bg-[rgb(var(--color-card))] rounded w-9 h-9"
+            className="md:hidden flex items-center justify-center p-1.5 focus:outline-none bg-[rgb(var(--color-card))] rounded w-9 h-9 z-50"
             aria-label="Toggle menu"
           >
-            <div className={`grid grid-cols-2 gap-1 transition-transform duration-300 ${isMenuOpen ? 'rotate-40' : ''}`}>
+            <div className={`grid grid-cols-2 gap-1 transition-transform duration-500 ${isMenuOpen ? 'rotate-90' : ''}`}>
               <span className="w-1.5 h-1.5 rounded-full bg-current"></span>
               <span className="w-1.5 h-1.5 rounded-full bg-current"></span>
               <span className="w-1.5 h-1.5 rounded-full bg-current"></span>
@@ -115,23 +115,17 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu - Full Width Sliding from Top */}
       <div 
-        className={`fixed inset-0 bg-opacity-50 md:hidden z-40 transition-opacity duration-300 ${
-          isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={() => setIsMenuOpen(false)}
-      ></div>
-
-      {/* Mobile Menu Drawer */}
-      <div 
-        className={`fixed top-15 right-0 bottom-0 w-full bg-[rgb(var(--color-background-light))] md:hidden z-60 transform transition-transform duration-500  shadow-xl ${
-          isMenuOpen ? 'translate-y-0' : 'translate-y-full'
+        className={`mobile-menu fixed top-15 left-0 right-0 bottom-0 w-full bg-[rgb(var(--color-background-light))] md:hidden z-60 transform transition-all duration-600 linear ${
+          isMenuOpen 
+            ? 'translate-y-0 opacity-100' 
+            : 'translate-y-[-150%] opacity-0'
         }`}
       >
-        <div className="pt-20 pb-6 px-6 h-full flex flex-col justify-between">
+        <div className="pt-12 pb-6 px-6 h-full flex flex-col justify-between">
           {/* Menu Links */}
-          <div className="flex flex-col space-y-5">
+          <div className="flex flex-col space-y-6">
             <a 
               href="#projects" 
               className="text-lg font-medium hover:text-[rgb(var(--color-primary-light))] transition-colors flex justify-between items-center"
@@ -169,7 +163,7 @@ export default function Navbar() {
           </div>
           
           {/* Social Links */}
-          <div className="pt-6">
+          <div className="mt-auto pt-6 border-t border-gray-700">
             <div className="flex flex-col space-y-4">
               <a 
                 href="https://github.com/yourusername" 
