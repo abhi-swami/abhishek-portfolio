@@ -33,7 +33,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="w-full py-3 xs:py-4 sm:py-5 md:py-6 px-3 xs:px-4 sm:px-6 md:px-8 relative z-60">
+      <nav className={`w-full py-3 xs:py-4 sm:py-5 md:py-6 px-3 xs:px-4 sm:px-6 md:px-8 relative z-60 ${isMenuOpen ? 'bg-[rgb(var(--color-background-light))]' : ''}`}>
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="text-lg xs:text-xl sm:text-xl md:text-2xl font-bold tracking-wider">

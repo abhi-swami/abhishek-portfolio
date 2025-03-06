@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/Hero";
 import Skills from "@/components/skills/Skills";
+import AboutMe from "@/components/Aboutme";
 
 
 const inter = Inter({ weight: "400", subsets: ['latin'] })
@@ -13,11 +14,9 @@ export default function Home() {
     <div
       className={`${inter.className} min-h-screen bg-[rgb(var(--color-background-light))] text-[rgb(var(--color-text-primary))] `}
     >
-      <Navbar />
-      <HeroSection/>
-      <Skills/>
-
-     
+      <HeroSection />
+      <AboutMe />
+      <Skills />
     </div>
   );
 }

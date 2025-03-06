@@ -13,14 +13,6 @@ module.exports = {
   // darkMode: 'class',
   theme: {
     extend: {
-      screens:{
-        xs: '320px',
-        sm: '578px',
-        md: '768px',
-        lg: '992px',
-        xl: '1200px',
-        '2xl': '1536px',
-      },
       animation: {
         'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'twinkle': 'twinkle 3s ease-in-out infinite',
