@@ -3,16 +3,15 @@ import React from 'react';
 
 const AboutMe = () => {
   return (
-    <section 
-      id="about" 
-      aria-label="About Me" 
-      className="bg-[rgb(var(--color-background-dark))] text-[rgb(var(--color-text-primary))]"
+    <section
+      id="about"
+      aria-label="About Me"
+      className="w-full 4 xs:py-4 sm:py-10 md:py-6 lg:py-8 bg-[rgb(var(--color-background-dark))]"
     >
-      <div className=" mx-auto px-4 py-8 md:py-24">
-        
+      <div className="max-w-7xl mx-auto px-4 xs:px-5 sm:px-6 lg:px-8">
         {/* Header Section */}
         <header className="mb-8 md:mb-16 text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 relative">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold relative">
             <span className="inline-block text-[rgb(var(--color-text-primary))]">
               About Me
             </span>

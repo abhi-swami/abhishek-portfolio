@@ -15,7 +15,7 @@ const prompt = Prompt({
 
 const HeroSection = () => {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
+    <div className="relative xs:max-h-[90vh] md:min-h-screen w-full overflow-hidden">
       {/* Background with overlay - Adjusted for face visibility */}
       <div className="absolute inset-0 z-0">
         <Image
