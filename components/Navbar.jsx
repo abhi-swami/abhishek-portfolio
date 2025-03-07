@@ -33,7 +33,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`w-full py-3 xs:py-4 sm:py-5 md:py-6 px-3 xs:px-4 sm:px-6 md:px-8 relative z-60 ${isMenuOpen ? 'bg-[rgb(var(--color-background-light))]' : ''}`}>
+      <nav className={`w-full py-3 xs:py-4 sm:py-5 md:py-6 px-3 xs:px-4 sm:px-6 md:px-8 relative z-60 ${isMenuOpen ? 'bg-[rgb(var(--color-background-primary-light))]' : ''}`}>
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="text-lg xs:text-xl sm:text-xl md:text-2xl font-bold tracking-wider">
@@ -48,7 +48,7 @@ export default function Navbar() {
                 href="https://github.com/yourusername" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="hover:text-[rgb(var(--color-primary-light))] transition-colors"
+                className="hover:text-[rgb(var(--color-primary))] transition-colors"
                 aria-label="GitHub Profile"
               >
                 <svg 
@@ -66,7 +66,7 @@ export default function Navbar() {
                 href="https://linkedin.com/in/yourusername" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="hover:text-[rgb(var(--color-primary-light))] transition-colors"
+                className="hover:text-[rgb(var(--color-primary))] transition-colors"
                 aria-label="LinkedIn Profile"
               >
                 <svg 
@@ -84,7 +84,7 @@ export default function Navbar() {
                 href="https://twitter.com/yourusername" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="hover:text-[rgb(var(--color-primary-light))] transition-colors"
+                className="hover:text-[rgb(var(--color-primary))] transition-colors"
                 aria-label="Twitter Profile"
               >
                 <svg 
@@ -117,7 +117,7 @@ export default function Navbar() {
 
       {/* Mobile Menu - Full Width Sliding from Top */}
       <div 
-        className={`mobile-menu fixed top-15 left-0 right-0 bottom-0 w-full bg-[rgb(var(--color-background-light))] md:hidden z-60 transform transition-all duration-600 linear ${
+        className={`mobile-menu fixed top-15 left-0 right-0 bottom-0 w-full bg-[rgb(var(--color-background-primary-light))] md:hidden z-60 transform transition-all duration-600 linear ${
           isMenuOpen 
             ? 'translate-y-0 opacity-100' 
             : 'translate-y-[-150%] opacity-0'
@@ -128,21 +128,21 @@ export default function Navbar() {
           <div className="flex flex-col space-y-6">
             <a 
               href="#projects" 
-              className="text-lg font-medium hover:text-[rgb(var(--color-primary-light))] transition-colors flex justify-between items-center"
+              className="text-lg font-medium hover:text-[rgb(var(--color-primary))] transition-colors flex justify-between items-center"
               onClick={() => setIsMenuOpen(false)}
             >
               Projects
             </a>
             <a 
               href="#skills" 
-              className="text-lg font-medium hover:text-[rgb(var(--color-primary-light))] transition-colors flex justify-between items-center"
+              className="text-lg font-medium hover:text-[rgb(var(--color-primary))] transition-colors flex justify-between items-center"
               onClick={() => setIsMenuOpen(false)}
             >
               Skills
             </a>
             <a 
               href="#about" 
-              className="text-lg font-medium hover:text-[rgb(var(--color-primary-light))] transition-colors flex justify-between items-center"
+              className="text-lg font-medium hover:text-[rgb(var(--color-primary))] transition-colors flex justify-between items-center"
               onClick={() => setIsMenuOpen(false)}
             >
               About
@@ -152,7 +152,7 @@ export default function Navbar() {
             </a>
             <a 
               href="#contact" 
-              className="text-lg font-medium hover:text-[rgb(var(--color-primary-light))] transition-colors flex justify-between items-center"
+              className="text-lg font-medium hover:text-[rgb(var(--color-primary))] transition-colors flex justify-between items-center"
               onClick={() => setIsMenuOpen(false)}
             >
               Contact
@@ -169,7 +169,7 @@ export default function Navbar() {
                 href="https://github.com/yourusername" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-lg font-medium hover:text-[rgb(var(--color-primary-light))] transition-colors"
+                className="text-lg font-medium hover:text-[rgb(var(--color-primary))] transition-colors"
               >
                 GitHub
               </a>
@@ -177,7 +177,7 @@ export default function Navbar() {
                 href="https://linkedin.com/in/yourusername" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-lg font-medium hover:text-[rgb(var(--color-primary-light))] transition-colors"
+                className="text-lg font-medium hover:text-[rgb(var(--color-primary))] transition-colors"
               >
                 LinkedIn
               </a>
@@ -185,7 +185,7 @@ export default function Navbar() {
                 href="https://twitter.com/yourusername" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-lg font-medium hover:text-[rgb(var(--color-primary-light))] transition-colors"
+                className="text-lg font-medium hover:text-[rgb(var(--color-primary))] transition-colors"
               >
                 Twitter
               </a>

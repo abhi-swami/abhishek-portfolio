@@ -22,7 +22,7 @@
   opacity: 1;
   transform: scale(1) translateX(0);
   z-index: 5;
-  box-shadow: 0 5px 15px rgb(var(--color-primary-light));
+  box-shadow: 0 5px 15px rgb(var(--color-primary));
 }
 
 /* Previous and next slides - Mobile first */

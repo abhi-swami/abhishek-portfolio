@@ -124,17 +124,17 @@ export default function SkillsSection() {
     <section
       id="skills"
       aria-label="Technical Skills"
-      className="w-full 4 xs:py-4 sm:py-10 md:py-6 lg:py-8 bg-[rgb(var(--color-background-light))]"
+      className="w-full 4 xs:py-4 sm:py-10 md:py-6 lg:py-8 bg-[rgb(var(--color-background-primary-light))]"
     >
       <div className="max-w-7xl mx-auto px-4 xs:px-2 sm:px-4 lg:px-6">
         {/* Section heading */}
         <header className="mb-2 md:mb-4 text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold relative">
-            <span className="inline-block text-[rgb(var(--color-text-primary))]">
+            <span className="inline-block text-[rgb(var(--color-text-primary-light))]">
               Tech Tools
             </span>
           </h2>
-          <p className="mt-2 xs:mt-3 sm:mt-4 text-sm xs:text-base sm:text-lg md:text-lg text-[rgb(var(--color-text-secondary))]">
+          <p className="mt-2 xs:mt-3 sm:mt-4 text-sm xs:text-base sm:text-lg md:text-lg text-[rgb(var(--color-text-primary-dark))]">
             Technologies I've been working with recently
           </p>
         </header>
@@ -166,7 +166,7 @@ export default function SkillsSection() {
                       className={`w-full h-full transition-all duration-300 ${activeIndex === index ? styles[skill.icon.toLowerCase()] : ""}`}
                     />
                   </div>
-                  <p className="text-xs xs:text-sm sm:text-sm md:text-base lg:text-base font-semibold mt-1 md:mt-2 text-center text-[rgb(var(--color-text-primary))]">
+                  <p className="text-xs xs:text-sm sm:text-sm md:text-base lg:text-base font-semibold mt-1 md:mt-2 text-center text-[rgb(var(--color-text-primary-light))]">
                     {skill.text}
                   </p>
                 </div>
@@ -175,14 +175,14 @@ export default function SkillsSection() {
 
             {/* Navigation buttons */}
             <button
-              className="hidden absolute top-1/2 left-1 xs:left-2 sm:left-3 md:left-5 -translate-y-1/2 w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-[rgb(var(--color-card))] rounded-full md:flex items-center justify-center text-base xs:text-lg sm:text-xl md:text-2xl text-[rgb(var(--color-text-primary))] shadow-md hover:bg-[rgb(var(--color-primary-light))] hover:text-white transition-all duration-300 z-10"
+              className="hidden absolute top-1/2 left-1 xs:left-2 sm:left-3 md:left-5 -translate-y-1/2 w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-[rgb(var(--color-card))] rounded-full md:flex items-center justify-center text-base xs:text-lg sm:text-xl md:text-2xl text-[rgb(var(--color-text-primary-light))] shadow-md hover:bg-[rgb(var(--color-primary))] hover:text-white transition-all duration-300 z-10"
               onClick={goToPrev}
               aria-label="Previous skill"
             >
               <span aria-hidden="true">&#8249;</span>
             </button>
             <button
-              className="hidden absolute top-1/2 right-1 xs:right-2 sm:right-3 md:right-5 -translate-y-1/2 w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-[rgb(var(--color-card))] rounded-full md:flex items-center justify-center text-base xs:text-lg sm:text-xl md:text-2xl text-[rgb(var(--color-text-primary))] shadow-md hover:bg-[rgb(var(--color-primary-light))] hover:text-white transition-all duration-300 z-10"
+              className="hidden absolute top-1/2 right-1 xs:right-2 sm:right-3 md:right-5 -translate-y-1/2 w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-[rgb(var(--color-card))] rounded-full md:flex items-center justify-center text-base xs:text-lg sm:text-xl md:text-2xl text-[rgb(var(--color-text-primary-light))] shadow-md hover:bg-[rgb(var(--color-primary))] hover:text-white transition-all duration-300 z-10"
               onClick={goToNext}
               aria-label="Next skill"
             >
@@ -200,8 +200,8 @@ export default function SkillsSection() {
               <button
                 key={index}
                 className={`w-1.5 h-1.5 xs:w-2 xs:h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-300 ${index === activeIndex
-                    ? 'bg-[rgb(var(--color-primary-light))] scale-110'
-                    : 'bg-[rgb(var(--color-text-primary))] bg-opacity-30'
+                    ? 'bg-[rgb(var(--color-primary))] scale-110'
+                    : 'bg-[rgb(var(--color-text-primary-light))] bg-opacity-30'
                   }`}
                 onClick={() => goToSlide(index)}
                 aria-label={`Go to slide ${index + 1}`}

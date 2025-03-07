@@ -6,13 +6,13 @@ const AboutMe = () => {
     <section
       id="about"
       aria-label="About Me"
-      className="w-full 4 xs:py-4 sm:py-10 md:py-6 lg:py-8 bg-[rgb(var(--color-background-dark))]"
+      className="w-full 4 xs:py-4 sm:py-10 md:py-6 lg:py-8 bg-[rgb(var(--color-background-primary-dark))]"
     >
       <div className="max-w-7xl mx-auto px-4 xs:px-5 sm:px-6 lg:px-8">
         {/* Header Section */}
         <header className="mb-8 md:mb-16 text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold relative">
-            <span className="inline-block text-[rgb(var(--color-text-primary))]">
+            <span className="inline-block text-[rgb(var(--color-text-primary-light))]">
               About Me
             </span>
           </h2>
@@ -20,7 +20,7 @@ const AboutMe = () => {
 
         {/* Bio Section */}
         <article className="max-w-4xl mx-auto  bg-[rgb(var(--color-card))] p-6 sm:p-8 rounded-xl shadow-lg">
-          <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-[rgb(var(--color-text-primary))]">
+          <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-[rgb(var(--color-text-primary-light))]">
             Hey there! <span role="img" aria-label="waving hand" className="inline-block animate-wave origin-bottom-right">👋</span>
           </h3>
           <div className="space-y-4 text-sm sm:text-base leading-relaxed">
@@ -29,7 +29,7 @@ const AboutMe = () => {
               Performance is my playground—I optimize <abbr title="Largest Contentful Paint">LCP</abbr>, <abbr title="First Contentful Paint">FCP</abbr>, and page speed to make the web smoother.
             </p>
             <p>
-              I thrive in <strong className="font-medium">state management</strong> with <span className="text-[rgb(var(--color-primary-light))]">Redux & SWR</span>, integrate <strong className="font-medium">Django</strong> backends,
+              I thrive in <strong className="font-medium">state management</strong> with <span className="text-[rgb(var(--color-primary))]">Redux & SWR</span>, integrate <strong className="font-medium">Django</strong> backends,
               and build sleek UI components like <strong className="font-medium">drag-and-drop interfaces, pagination, and modals</strong>.
             </p>
             <p>
