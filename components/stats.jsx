@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 
 // Loader component for consistent loading spinners
 const Loader = () => (
@@ -23,6 +22,188 @@ const ErrorMessage = ({ message, onRetry }) => (
     )}
   </div>
 );
+
+// Fullscreen component as a separate entity
+const FullscreenView = ({ src, title, onClose }) => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  const handleLoad = () => {
+    setLoading(false);
+  };
+
+  const handleError = () => {
+    setLoading(false);
+    setError(true);
+  };
+
+  const handleRetry = (e) => {
+    e.stopPropagation();
+    setLoading(true);
+    setError(false);
+  };
+
+  useEffect(() => {
+    // Lock body scroll when fullscreen is open
+    document.body.style.overflow = 'hidden';
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
+  return (
+    <div 
+      className="fixed inset-0 z-50 bg-[rgba(var(--color-background-primary-dark),0.95)] flex items-center justify-center"
+      onClick={onClose}
+    >
+      <div className="absolute top-2 left-0 right-0 text-center text-[rgb(var(--color-text-primary-light))] text-sm z-10">
+        Tap anywhere to close
+      </div>
+      
+      {/* For landscape orientation on mobile */}
+      <div className="md:hidden w-screen h-screen flex items-center justify-center">
+        <div 
+          className="relative w-[95vh] h-[90vw] transform rotate-90 origin-center" 
+          onClick={(e) => e.stopPropagation()}
+        >
+          {loading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-[rgba(var(--color-background-secondary-light),0.5)] z-10 rounded-lg">
+              <Loader />
+            </div>
+          )}
+          {error ? (
+            <div className="absolute inset-0 flex items-center justify-center rounded-lg">
+              <ErrorMessage 
+                message={`Could not load ${title}`} 
+                onRetry={handleRetry}
+              />
+            </div>
+          ) : (
+            <iframe
+              src={src}
+              style={{ border: 'none' }}
+              width="100%"
+              height="100%"
+              className="absolute inset-0 w-full h-full rounded-lg shadow-2xl"
+              title={`${title} (Fullscreen)`}
+              loading="lazy"
+              onLoad={handleLoad}
+              onError={handleError}
+            ></iframe>
+          )}
+        </div>
+      </div>
+      
+      {/* For desktop and tablets - no rotation needed */}
+      <div className="hidden md:block w-[90%] h-[90%] max-w-5xl">
+        <div 
+          className="relative w-full h-full" 
+          onClick={(e) => e.stopPropagation()}
+        >
+          {loading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-[rgba(var(--color-background-secondary-light),0.5)] z-10 rounded-lg">
+              <Loader />
+            </div>
+          )}
+          {error ? (
+            <div className="absolute inset-0 flex items-center justify-center rounded-lg">
+              <ErrorMessage 
+                message={`Could not load ${title}`} 
+                onRetry={handleRetry}
+              />
+            </div>
+          ) : (
+            <iframe
+              src={src}
+              style={{ border: 'none' }}
+              width="100%"
+              height="100%"
+              className="absolute inset-0 w-full h-full rounded-lg shadow-2xl"
+              title={`${title} (Fullscreen)`}
+              loading="lazy"
+              onLoad={handleLoad}
+              onError={handleError}
+            ></iframe>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Iframe component with loading and error states
+const StatIframe = ({ src, title, className }) => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
+
+  const handleLoad = () => {
+    setLoading(false);
+  };
+
+  const handleError = () => {
+    setLoading(false);
+    setError(true);
+  };
+
+  const handleRetry = () => {
+    setLoading(true);
+    setError(false);
+  };
+
+  const handleTap = () => {
+    setFullscreen(true);
+  };
+
+  const closeFullscreen = () => {
+    setFullscreen(false);
+  };
+
+  return (
+    <>
+      <div 
+        className="relative w-full h-full cursor-pointer"
+        onClick={handleTap}
+      >
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-[rgba(var(--color-background-secondary-light),0.5)] z-10">
+            <Loader />
+          </div>
+        )}
+        {error ? (
+          <ErrorMessage 
+            message={`Could not load ${title}`} 
+            onRetry={handleRetry}
+          />
+        ) : (
+          <iframe
+            src={src}
+            style={{ border: 'none', overflow: 'hidden' }}
+            width="100%"
+            height="100%"
+            className={`absolute inset-0 w-full h-full ${className || ''}`}
+            title={title}
+            loading="lazy"
+            onLoad={handleLoad}
+            onError={handleError}
+          ></iframe>
+        )}
+        <div className="absolute bottom-1 right-1 p-1 z-20 bg-[rgba(var(--color-background-primary-dark),0.7)] text-[rgb(var(--color-text-primary-light))] rounded-md text-xs">
+          Tap to expand
+        </div>
+      </div>
+
+      {fullscreen && (
+        <FullscreenView 
+          src={src} 
+          title={title} 
+          onClose={closeFullscreen} 
+        />
+      )}
+    </>
+  );
+};
 
 export default function Stats() {
   // State management
@@ -63,7 +244,6 @@ export default function Stats() {
               Github Statistics
             </span>
           </h2>
-
         </header>
 
         {/* View Toggle */}
@@ -71,10 +251,11 @@ export default function Stats() {
           <div className="inline-flex gap-3 rounded-sm p-1 bg-[rgb(var(--color-background-primary-light))] shadow-md">
             <button
               onClick={() => handleStatsViewToggle("personal")}
-              className={`px-4 py-2 text-sm sm:text-base rounded-sm transition-all duration-300 ${statsView === "personal"
+              className={`px-4 py-2 text-sm sm:text-base rounded-sm transition-all duration-300 ${
+                statsView === "personal"
                 ? "bg-[rgb(var(--color-primary))] text-[rgb(var(--color-text-secondary-dark))] font-medium shadow"
                 : "bg-transparent text-[rgb(var(--color-text-primary-dark))] hover:bg-[rgba(var(--color-primary),0.1)]"
-                }`}
+              }`}
               aria-pressed={statsView === "personal"}
             >
               <span className="flex items-center gap-2">
@@ -86,10 +267,11 @@ export default function Stats() {
             </button>
             <button
               onClick={() => handleStatsViewToggle("contributions")}
-              className={`px-4 py-2 text-sm sm:text-base rounded-sm transition-all duration-300 ${statsView === "contributions"
+              className={`px-4 py-2 text-sm sm:text-base rounded-sm transition-all duration-300 ${
+                statsView === "contributions"
                 ? "bg-[rgb(var(--color-primary))] text-[rgb(var(--color-text-secondary-dark))] font-medium shadow"
                 : "bg-transparent text-[rgb(var(--color-text-primary-dark))] hover:bg-[rgba(var(--color-primary),0.1)]"
-                }`}
+              }`}
               aria-pressed={statsView === "contributions"}
             >
               <span className="flex items-center gap-2">
@@ -107,34 +289,21 @@ export default function Stats() {
           {statsView === "personal" ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {/* Stats Card */}
-              <div className="bg-[rgb(var(--color-background-secondary-light))] rounded-sm shadow-lg  relative min-h-[150px] sm:min-h-[150px]">
-                <div className="relative w-full h-full">
-                  <iframe
-                    src={statsCardUrl}
-                    style={{ border: 'none', overflow: 'hidden' }}
-                    width="100%"
-                    height="100%"
-                    className="absolute inset-0 w-full h-full rounded-lg"
-                    title="GitHub Stats"
-                    loading="lazy"
-                  ></iframe>
-                </div>
+              <div className="bg-[rgb(var(--color-background-secondary-light))] rounded-sm shadow-lg relative min-h-[180px] sm:min-h-[200px] md:min-h-[180px]">
+                <StatIframe
+                  src={statsCardUrl}
+                  title="GitHub Stats"
+                  className="rounded-sm"
+                />
               </div>
 
               {/* Streak Stats Card */}
-              <div className="bg-[rgb(var(--color-background-secondary-light))] rounded-sm shadow-lg relative min-h-[150px] sm:min-h-[150px]">
-                <div className="relative w-full h-full">
-                  <iframe
-                    src={streakStatsUrl}
-
-                    style={{ border: 'none', overflow: 'hidden' }}
-                    width="100%"
-                    height="100%"
-                    className="absolute inset-0 w-full h-full rounded-lg"
-                    title="GitHub Streak Stats"
-                    loading="lazy"
-                  ></iframe>
-                </div>
+              <div className="bg-[rgb(var(--color-background-secondary-light))] rounded-sm shadow-lg relative min-h-[180px] sm:min-h-[200px] md:min-h-[180px]">
+                <StatIframe
+                  src={streakStatsUrl}
+                  title="GitHub Streak Stats"
+                  className="rounded-sm"
+                />
               </div>
             </div>
           ) : (
@@ -142,21 +311,58 @@ export default function Stats() {
               {/* Contribution Activity */}
               <div className="bg-[rgb(var(--color-background-secondary-light))] rounded-xl shadow-lg overflow-hidden">
                 <div className="relative h-[200px] sm:h-[250px] md:h-[300px]">
-                  <iframe
+                  <StatIframe
                     src={contributionGraphUrl}
-                    style={{ border: 'none', overflow: 'hidden' }}
-                    width="100%"
-                    height="100%"
-                    className="absolute inset-0 w-full h-full"
                     title="GitHub Contribution Graph"
-                    loading="lazy"
-                  ></iframe>
+                  />
+                </div>
+                
+                {/* Time Range Toggle - Only shown for demonstration since GitHub API doesn't support this directly */}
+                <div className="p-3 border-t border-[rgba(var(--color-background-primary-light),0.2)] bg-[rgb(var(--color-background-secondary-dark))]">
+                  <div className="flex justify-center space-x-2">
+                    <button
+                      onClick={() => handleTimeRangeToggle("weekly")}
+                      className={`px-3 py-1.5 text-xs sm:text-sm rounded-sm transition-all duration-200 ${
+                        timeRange === "weekly"
+                          ? "bg-[rgb(var(--color-primary))] text-[rgb(var(--color-text-secondary-dark))]"
+                          : "bg-[rgba(var(--color-primary),0.1)] text-[rgb(var(--color-text-secondary-dark))]"
+                      }`}
+                    >
+                      Last Week
+                    </button>
+                    <button
+                      onClick={() => handleTimeRangeToggle("monthly")}
+                      className={`px-3 py-1.5 text-xs sm:text-sm rounded-sm transition-all duration-200 ${
+                        timeRange === "monthly"
+                          ? "bg-[rgb(var(--color-primary))] text-[rgb(var(--color-text-secondary-dark))]"
+                          : "bg-[rgba(var(--color-primary),0.1)] text-[rgb(var(--color-text-secondary-dark))]"
+                      }`}
+                    >
+                      Last Month
+                    </button>
+                    <button
+                      onClick={() => handleTimeRangeToggle("yearly")}
+                      className={`px-3 py-1.5 text-xs sm:text-sm rounded-sm transition-all duration-200 ${
+                        timeRange === "yearly"
+                          ? "bg-[rgb(var(--color-primary))] text-[rgb(var(--color-text-secondary-dark))]"
+                          : "bg-[rgba(var(--color-primary),0.1)] text-[rgb(var(--color-text-secondary-dark))]"
+                      }`}
+                    >
+                      Year
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           )}
         </div>
 
+        {/* Small info text about tap feature */}
+        <div className="mt-4 text-center">
+          <p className="text-xs text-[rgb(var(--color-text-primary-dark))] opacity-70">
+            Tap any chart to view in full screen
+          </p>
+        </div>
       </div>
     </div>
   );
