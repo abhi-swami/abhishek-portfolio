@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
+import Image from "next/image";
 
 // Loader component for consistent loading spinners
 const Loader = () => (
@@ -85,14 +86,18 @@ const FullscreenView = ({ src, title, onClose }) => {
               />
             </div>
           ) : (
-            <img
-              id="fullscreen-img"
-              src={src}
-              alt={`${title} (Fullscreen)`}
-              className="absolute inset-0 w-full h-full object-contain rounded-lg shadow-2xl"
-              onLoad={handleLoad}
-              onError={handleError}
-            />
+            <div className="absolute inset-0 w-full h-full rounded-lg shadow-2xl">
+              <Image
+                id="fullscreen-img"
+                src={src}
+                alt={`${title} (Fullscreen)`}
+                fill
+                className="object-contain rounded-lg"
+                onLoadingComplete={handleLoad}
+                onError={handleError}
+                unoptimized={true} // For external URLs
+              />
+            </div>
           )}
         </div>
       </div>
@@ -116,14 +121,18 @@ const FullscreenView = ({ src, title, onClose }) => {
               />
             </div>
           ) : (
-            <img
-              id="fullscreen-img-desktop"
-              src={src}
-              alt={`${title} (Fullscreen)`}
-              className="absolute inset-0 w-full h-full object-contain rounded-lg shadow-2xl"
-              onLoad={handleLoad}
-              onError={handleError}
-            />
+            <div className="absolute inset-0 w-full h-full rounded-lg shadow-2xl">
+              <Image
+                id="fullscreen-img-desktop"
+                src={src}
+                alt={`${title} (Fullscreen)`}
+                fill
+                className="object-contain rounded-lg"
+                onLoadingComplete={handleLoad}
+                onError={handleError}
+                unoptimized={true} // For external URLs
+              />
+            </div>
           )}
         </div>
       </div>
@@ -149,11 +158,6 @@ const StatImage = ({ src, title, className }) => {
   const handleRetry = () => {
     setLoading(true);
     setError(false);
-    // Force image reload by adding a timestamp query parameter
-    const imgElement = document.getElementById(`stat-img-${title.replace(/\s+/g, '-').toLowerCase()}`);
-    if (imgElement) {
-      imgElement.src = `${src}${src.includes('?') ? '&' : '?'}t=${Date.now()}`;
-    }
   };
 
   const handleTap = () => {
@@ -181,14 +185,18 @@ const StatImage = ({ src, title, className }) => {
             onRetry={handleRetry}
           />
         ) : (
-          <img
-            id={`stat-img-${title.replace(/\s+/g, '-').toLowerCase()}`}
-            src={src}
-            alt={title}
-            className={`absolute inset-0 w-full h-full object-contain ${className || ''}`}
-            onLoad={handleLoad}
-            onError={handleError}
-          />
+          <div className={`absolute inset-0 w-full h-full ${className || ''}`}>
+            <Image
+              id={`stat-img-${title.replace(/\s+/g, '-').toLowerCase()}`}
+              src={src}
+              alt={title}
+              fill
+              className="object-contain"
+              onLoadingComplete={handleLoad}
+              onError={handleError}
+              unoptimized={true} // For external URLs
+            />
+          </div>
         )}
         <div className="absolute bottom-1 right-1 p-1 z-20 bg-[rgba(var(--color-background-primary-dark),0.7)] text-[rgb(var(--color-text-primary-light))] rounded-md text-xs">
           Tap to expand

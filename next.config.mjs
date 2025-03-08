@@ -16,26 +16,12 @@ const nextConfig = {
         pathname: '/*',
         search: '?*',
       },
-    ],
-    domains: [
-      // GitHub stat card domains
-      'github-readme-stats.vercel.app',
-      'github-readme-streak-stats.herokuapp.com',
-      
-      // GitHub contribution graph domains
-      'ghchart.rshah.org',
-      'github-contribution-graph.ez4o.com',
-      'github-readme-activity-graph.vercel.app',
-      
-      // In case you need GitHub user content
-      'avatars.githubusercontent.com',
-      'raw.githubusercontent.com',
-      'user-images.githubusercontent.com',
-      
-      // Additional domains that might be used
-      'github.com',
-      'github-profile-trophy.vercel.app',
-      'github-profile-summary-cards.vercel.app'
+      {
+        protocol: 'https',
+        hostname: 'github-readme-activity-graph.vercel.app',
+        port: '',
+        pathname: '/**',
+      }
     ],
   },
 };
