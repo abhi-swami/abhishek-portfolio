@@ -41,30 +41,35 @@ const FullscreenView = ({ src, title, onClose }) => {
     e.stopPropagation();
     setLoading(true);
     setError(false);
+    // Force image reload by adding a timestamp query parameter
+    const imgElement = document.getElementById("fullscreen-img");
+    if (imgElement) {
+      imgElement.src = `${src}${src.includes('?') ? '&' : '?'}t=${Date.now()}`;
+    }
   };
 
   useEffect(() => {
     // Lock body scroll when fullscreen is open
     document.body.style.overflow = 'hidden';
-    
+
     return () => {
       document.body.style.overflow = '';
     };
   }, []);
 
   return (
-    <div 
+    <div
       className="fixed inset-0 z-50 bg-[rgba(var(--color-background-primary-dark),0.95)] flex items-center justify-center"
       onClick={onClose}
     >
       <div className="absolute top-2 left-0 right-0 text-center text-[rgb(var(--color-text-primary-light))] text-sm z-10">
         Tap anywhere to close
       </div>
-      
+
       {/* For landscape orientation on mobile */}
       <div className="md:hidden w-screen h-screen flex items-center justify-center">
-        <div 
-          className="relative w-[95vh] h-[90vw] transform rotate-90 origin-center" 
+        <div
+          className="relative w-[95vh] h-[90vw] transform rotate-90 origin-center"
           onClick={(e) => e.stopPropagation()}
         >
           {loading && (
@@ -74,31 +79,28 @@ const FullscreenView = ({ src, title, onClose }) => {
           )}
           {error ? (
             <div className="absolute inset-0 flex items-center justify-center rounded-lg">
-              <ErrorMessage 
-                message={`Could not load ${title}`} 
+              <ErrorMessage
+                message={`Could not load ${title}`}
                 onRetry={handleRetry}
               />
             </div>
           ) : (
-            <iframe
+            <img
+              id="fullscreen-img"
               src={src}
-              style={{ border: 'none' }}
-              width="100%"
-              height="100%"
-              className="absolute inset-0 w-full h-full rounded-lg shadow-2xl"
-              title={`${title} (Fullscreen)`}
-              loading="lazy"
+              alt={`${title} (Fullscreen)`}
+              className="absolute inset-0 w-full h-full object-contain rounded-lg shadow-2xl"
               onLoad={handleLoad}
               onError={handleError}
-            ></iframe>
+            />
           )}
         </div>
       </div>
-      
+
       {/* For desktop and tablets - no rotation needed */}
       <div className="hidden md:block w-[90%] h-[90%] max-w-5xl">
-        <div 
-          className="relative w-full h-full" 
+        <div
+          className="relative w-full h-full"
           onClick={(e) => e.stopPropagation()}
         >
           {loading && (
@@ -108,23 +110,20 @@ const FullscreenView = ({ src, title, onClose }) => {
           )}
           {error ? (
             <div className="absolute inset-0 flex items-center justify-center rounded-lg">
-              <ErrorMessage 
-                message={`Could not load ${title}`} 
+              <ErrorMessage
+                message={`Could not load ${title}`}
                 onRetry={handleRetry}
               />
             </div>
           ) : (
-            <iframe
+            <img
+              id="fullscreen-img-desktop"
               src={src}
-              style={{ border: 'none' }}
-              width="100%"
-              height="100%"
-              className="absolute inset-0 w-full h-full rounded-lg shadow-2xl"
-              title={`${title} (Fullscreen)`}
-              loading="lazy"
+              alt={`${title} (Fullscreen)`}
+              className="absolute inset-0 w-full h-full object-contain rounded-lg shadow-2xl"
               onLoad={handleLoad}
               onError={handleError}
-            ></iframe>
+            />
           )}
         </div>
       </div>
@@ -132,8 +131,8 @@ const FullscreenView = ({ src, title, onClose }) => {
   );
 };
 
-// Iframe component with loading and error states
-const StatIframe = ({ src, title, className }) => {
+// Image component with loading and error states
+const StatImage = ({ src, title, className }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
@@ -150,6 +149,11 @@ const StatIframe = ({ src, title, className }) => {
   const handleRetry = () => {
     setLoading(true);
     setError(false);
+    // Force image reload by adding a timestamp query parameter
+    const imgElement = document.getElementById(`stat-img-${title.replace(/\s+/g, '-').toLowerCase()}`);
+    if (imgElement) {
+      imgElement.src = `${src}${src.includes('?') ? '&' : '?'}t=${Date.now()}`;
+    }
   };
 
   const handleTap = () => {
@@ -162,7 +166,7 @@ const StatIframe = ({ src, title, className }) => {
 
   return (
     <>
-      <div 
+      <div
         className="relative w-full h-full cursor-pointer"
         onClick={handleTap}
       >
@@ -172,22 +176,19 @@ const StatIframe = ({ src, title, className }) => {
           </div>
         )}
         {error ? (
-          <ErrorMessage 
-            message={`Could not load ${title}`} 
+          <ErrorMessage
+            message={`Could not load ${title}`}
             onRetry={handleRetry}
           />
         ) : (
-          <iframe
+          <img
+            id={`stat-img-${title.replace(/\s+/g, '-').toLowerCase()}`}
             src={src}
-            style={{ border: 'none', overflow: 'hidden' }}
-            width="100%"
-            height="100%"
-            className={`absolute inset-0 w-full h-full ${className || ''}`}
-            title={title}
-            loading="lazy"
+            alt={title}
+            className={`absolute inset-0 w-full h-full object-contain ${className || ''}`}
             onLoad={handleLoad}
             onError={handleError}
-          ></iframe>
+          />
         )}
         <div className="absolute bottom-1 right-1 p-1 z-20 bg-[rgba(var(--color-background-primary-dark),0.7)] text-[rgb(var(--color-text-primary-light))] rounded-md text-xs">
           Tap to expand
@@ -195,10 +196,10 @@ const StatIframe = ({ src, title, className }) => {
       </div>
 
       {fullscreen && (
-        <FullscreenView 
-          src={src} 
-          title={title} 
-          onClose={closeFullscreen} 
+        <FullscreenView
+          src={src}
+          title={title}
+          onClose={closeFullscreen}
         />
       )}
     </>
@@ -207,7 +208,6 @@ const StatIframe = ({ src, title, className }) => {
 
 export default function Stats() {
   // State management
-  const [timeRange, setTimeRange] = useState("yearly");
   const [statsView, setStatsView] = useState("contributions");
   const [isVisible, setIsVisible] = useState(false);
 
@@ -222,10 +222,6 @@ export default function Stats() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Toggle handlers
-  const handleTimeRangeToggle = useCallback((range) => {
-    setTimeRange(range);
-  }, []);
 
   const handleStatsViewToggle = useCallback((view) => {
     setStatsView(view);
@@ -248,18 +244,17 @@ export default function Stats() {
 
         {/* View Toggle */}
         <div className="flex flex-wrap justify-center gap-4 mb-8">
-          <div className="inline-flex gap-3 rounded-sm p-1 bg-[rgb(var(--color-background-primary-light))] shadow-md">
+          <div className="inline-flex gap-1 sm:gap-2 md:gap-3 rounded-sm p-1">
             <button
               onClick={() => handleStatsViewToggle("personal")}
-              className={`px-4 py-2 text-sm sm:text-base rounded-sm transition-all duration-300 ${
-                statsView === "personal"
+              className={`px-2 py-1 md:px-4 md:py-2 text-sm sm:text-base rounded-sm transition-all duration-300 ${statsView === "personal"
                 ? "bg-[rgb(var(--color-primary))] text-[rgb(var(--color-text-secondary-dark))] font-medium shadow"
                 : "bg-transparent text-[rgb(var(--color-text-primary-dark))] hover:bg-[rgba(var(--color-primary),0.1)]"
-              }`}
+                }`}
               aria-pressed={statsView === "personal"}
             >
-              <span className="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <span className="flex items-center gap-1 md:gap-2 text-ellipsis">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4  " viewBox="0 0 20 20" fill="currentColor">
                   <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
                 </svg>
                 Personal Stats
@@ -267,14 +262,13 @@ export default function Stats() {
             </button>
             <button
               onClick={() => handleStatsViewToggle("contributions")}
-              className={`px-4 py-2 text-sm sm:text-base rounded-sm transition-all duration-300 ${
-                statsView === "contributions"
+              className={`px-2 py-1 md:px-4 md:py-2 text-sm sm:text-base rounded-sm transition-all duration-300 ${statsView === "contributions"
                 ? "bg-[rgb(var(--color-primary))] text-[rgb(var(--color-text-secondary-dark))] font-medium shadow"
                 : "bg-transparent text-[rgb(var(--color-text-primary-dark))] hover:bg-[rgba(var(--color-primary),0.1)]"
-              }`}
+                }`}
               aria-pressed={statsView === "contributions"}
             >
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-1 md:gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
@@ -290,7 +284,7 @@ export default function Stats() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {/* Stats Card */}
               <div className="bg-[rgb(var(--color-background-secondary-light))] rounded-sm shadow-lg relative min-h-[180px] sm:min-h-[200px] md:min-h-[180px]">
-                <StatIframe
+                <StatImage
                   src={statsCardUrl}
                   title="GitHub Stats"
                   className="rounded-sm"
@@ -299,7 +293,7 @@ export default function Stats() {
 
               {/* Streak Stats Card */}
               <div className="bg-[rgb(var(--color-background-secondary-light))] rounded-sm shadow-lg relative min-h-[180px] sm:min-h-[200px] md:min-h-[180px]">
-                <StatIframe
+                <StatImage
                   src={streakStatsUrl}
                   title="GitHub Streak Stats"
                   className="rounded-sm"
@@ -311,47 +305,12 @@ export default function Stats() {
               {/* Contribution Activity */}
               <div className="bg-[rgb(var(--color-background-secondary-light))] rounded-xl shadow-lg overflow-hidden">
                 <div className="relative h-[200px] sm:h-[250px] md:h-[300px]">
-                  <StatIframe
+                  <StatImage
                     src={contributionGraphUrl}
                     title="GitHub Contribution Graph"
                   />
                 </div>
-                
-                {/* Time Range Toggle - Only shown for demonstration since GitHub API doesn't support this directly */}
-                <div className="p-3 border-t border-[rgba(var(--color-background-primary-light),0.2)] bg-[rgb(var(--color-background-secondary-dark))]">
-                  <div className="flex justify-center space-x-2">
-                    <button
-                      onClick={() => handleTimeRangeToggle("weekly")}
-                      className={`px-3 py-1.5 text-xs sm:text-sm rounded-sm transition-all duration-200 ${
-                        timeRange === "weekly"
-                          ? "bg-[rgb(var(--color-primary))] text-[rgb(var(--color-text-secondary-dark))]"
-                          : "bg-[rgba(var(--color-primary),0.1)] text-[rgb(var(--color-text-secondary-dark))]"
-                      }`}
-                    >
-                      Last Week
-                    </button>
-                    <button
-                      onClick={() => handleTimeRangeToggle("monthly")}
-                      className={`px-3 py-1.5 text-xs sm:text-sm rounded-sm transition-all duration-200 ${
-                        timeRange === "monthly"
-                          ? "bg-[rgb(var(--color-primary))] text-[rgb(var(--color-text-secondary-dark))]"
-                          : "bg-[rgba(var(--color-primary),0.1)] text-[rgb(var(--color-text-secondary-dark))]"
-                      }`}
-                    >
-                      Last Month
-                    </button>
-                    <button
-                      onClick={() => handleTimeRangeToggle("yearly")}
-                      className={`px-3 py-1.5 text-xs sm:text-sm rounded-sm transition-all duration-200 ${
-                        timeRange === "yearly"
-                          ? "bg-[rgb(var(--color-primary))] text-[rgb(var(--color-text-secondary-dark))]"
-                          : "bg-[rgba(var(--color-primary),0.1)] text-[rgb(var(--color-text-secondary-dark))]"
-                      }`}
-                    >
-                      Year
-                    </button>
-                  </div>
-                </div>
+
               </div>
             </div>
           )}
