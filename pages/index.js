@@ -5,6 +5,7 @@ import HeroSection from "@/components/Hero";
 import Skills from "@/components/skills/Skills";
 import AboutMe from "@/components/Aboutme";
 import Stats from "@/components/stats";
+import Contact from "@/components/Contact";
 
 const inter = Inter({ weight: "400", subsets: ['latin'] })
 
@@ -18,6 +19,7 @@ export default function Home() {
       <AboutMe />
       <Skills />
       <Stats />
+      <Contact />
     </div>
   );
 }
