@@ -28,6 +28,7 @@ const ErrorMessage = ({ message, onRetry }) => (
 const FullscreenView = ({ src, title, onClose }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const handleLoad = () => {
     setLoading(false);
@@ -52,25 +53,57 @@ const FullscreenView = ({ src, title, onClose }) => {
   useEffect(() => {
     // Lock body scroll when fullscreen is open
     document.body.style.overflow = 'hidden';
-
+    
+    // Trigger animation after a short delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 50);
+    
     return () => {
       document.body.style.overflow = '';
+      clearTimeout(timer);
     };
   }, []);
 
+  // Close with animation
+  const handleClose = (e) => {
+    e.stopPropagation();
+    setIsVisible(false);
+    setTimeout(() => {
+      onClose();
+    }, 300); // Match this with the CSS transition duration
+  };
+
   return (
     <div
-      className="fixed inset-0 z-50 bg-[rgba(var(--color-background-primary-dark),0.95)] flex items-center justify-center"
-      onClick={onClose}
+      className={`fixed inset-0 z-50 bg-[rgba(var(--color-background-primary-dark),0)] flex items-center justify-center transition-all duration-300 ease-in-out ${
+        isVisible 
+          ? 'bg-[rgba(var(--color-background-primary-dark),0.95)]' 
+          : 'bg-[rgba(var(--color-background-primary-dark),0)]'
+      }`}
+      onClick={handleClose}
     >
-      <div className="absolute top-2 left-0 right-0 text-center text-[rgb(var(--color-text-primary-light))] text-sm z-10">
-        Tap anywhere to close
-      </div>
+      {/* Close button */}
+      <button
+        className={`absolute top-4 right-4 z-20 p-2 rounded-full bg-[rgba(var(--color-background-primary-dark),0.7)] text-[rgb(var(--color-text-primary-light))] hover:bg-[rgba(var(--color-background-primary-dark),0.9)] transition-all duration-300 ${
+          isVisible ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform -translate-y-4'
+        }`}
+        onClick={handleClose}
+        aria-label="Close fullscreen view"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
 
       {/* For landscape orientation on mobile */}
       <div className="md:hidden w-screen h-screen flex items-center justify-center">
         <div
-          className="relative w-[95vh] h-[90vw] transform rotate-90 origin-center"
+          className={`relative w-[95vh] h-[90vw] transform rotate-90 origin-center transition-all duration-300 ease-out ${
+            isVisible 
+              ? 'opacity-100 scale-100' 
+              : 'opacity-0 scale-90'
+          }`}
           onClick={(e) => e.stopPropagation()}
         >
           {loading && (
@@ -86,7 +119,7 @@ const FullscreenView = ({ src, title, onClose }) => {
               />
             </div>
           ) : (
-            <div className="absolute inset-0 w-full h-full rounded-lg shadow-2xl">
+            <div className="absolute inset-0 w-full h-full rounded-lg shadow-2xl overflow-hidden">
               <Image
                 id="fullscreen-img"
                 src={src}
@@ -105,7 +138,11 @@ const FullscreenView = ({ src, title, onClose }) => {
       {/* For desktop and tablets - no rotation needed */}
       <div className="hidden md:block w-[90%] h-[90%] max-w-5xl">
         <div
-          className="relative w-full h-full"
+          className={`relative w-full h-full transition-all duration-300 ease-out ${
+            isVisible 
+              ? 'opacity-100 scale-100' 
+              : 'opacity-0 scale-90'
+          }`}
           onClick={(e) => e.stopPropagation()}
         >
           {loading && (
@@ -121,7 +158,7 @@ const FullscreenView = ({ src, title, onClose }) => {
               />
             </div>
           ) : (
-            <div className="absolute inset-0 w-full h-full rounded-lg shadow-2xl">
+            <div className="absolute inset-0 w-full h-full rounded-lg shadow-2xl overflow-hidden">
               <Image
                 id="fullscreen-img-desktop"
                 src={src}
@@ -145,6 +182,7 @@ const StatImage = ({ src, title, className }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
+  const [animatingOut, setAnimatingOut] = useState(false);
 
   const handleLoad = () => {
     setLoading(false);
@@ -171,7 +209,7 @@ const StatImage = ({ src, title, className }) => {
   return (
     <>
       <div
-        className="relative w-full h-full cursor-pointer"
+        className="relative w-full h-full cursor-pointer overflow-hidden"
         onClick={handleTap}
       >
         {loading && (
@@ -185,7 +223,7 @@ const StatImage = ({ src, title, className }) => {
             onRetry={handleRetry}
           />
         ) : (
-          <div className={`absolute inset-0 w-full h-full ${className || ''}`}>
+          <div className={`absolute inset-0 w-full h-full transition-transform duration-200 hover:scale-105 ${className || ''}`}>
             <Image
               id={`stat-img-${title.replace(/\s+/g, '-').toLowerCase()}`}
               src={src}
@@ -291,7 +329,7 @@ export default function Stats() {
           {statsView === "personal" ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {/* Stats Card */}
-              <div className="bg-[rgb(var(--color-background-secondary-light))] rounded-sm shadow-lg relative min-h-[180px] sm:min-h-[200px] md:min-h-[180px]">
+              <div className="bg-[rgb(var(--color-background-secondary-light))] rounded-sm shadow-lg relative min-h-[180px] sm:min-h-[200px] md:min-h-[180px] overflow-hidden">
                 <StatImage
                   src={statsCardUrl}
                   title="GitHub Stats"
@@ -300,7 +338,7 @@ export default function Stats() {
               </div>
 
               {/* Streak Stats Card */}
-              <div className="bg-[rgb(var(--color-background-secondary-light))] rounded-sm shadow-lg relative min-h-[180px] sm:min-h-[200px] md:min-h-[180px]">
+              <div className="bg-[rgb(var(--color-background-secondary-light))] rounded-sm shadow-lg relative min-h-[180px] sm:min-h-[200px] md:min-h-[180px] overflow-hidden">
                 <StatImage
                   src={streakStatsUrl}
                   title="GitHub Streak Stats"
@@ -318,18 +356,11 @@ export default function Stats() {
                     title="GitHub Contribution Graph"
                   />
                 </div>
-
               </div>
             </div>
           )}
         </div>
 
-        {/* Small info text about tap feature */}
-        <div className="mt-4 text-center">
-          <p className="text-xs text-[rgb(var(--color-text-primary-dark))] opacity-70">
-            Tap any chart to view in full screen
-          </p>
-        </div>
       </div>
     </div>
   );
