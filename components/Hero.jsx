@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import heroImage from "../public/hero.webp"
 import Navbar from './Navbar';
 import { Prompt } from "next/font/google";
 
@@ -19,7 +18,7 @@ const HeroSection = () => {
       {/* Background with overlay - Adjusted for face visibility */}
       <div className="absolute inset-0 z-0">
         <Image
-          src={heroImage.src}
+          src="/hero.png"
           alt="Background pattern"
           fill
           className="object-cover xs:object-[85%_90%] lg:object-center"
