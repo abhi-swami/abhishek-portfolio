@@ -13,6 +13,7 @@ export default function Contact() {
   const [submitError, setSubmitError] = useState(false);
   const [activeField, setActiveField] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [copiedField, setCopiedField] = useState(null);
 
   // Animation for section entry
   useEffect(() => {
@@ -87,6 +88,16 @@ export default function Contact() {
     setSubmitting(false);
   };
 
+  const handleCopy = async (text, field) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedField(field);
+      setTimeout(() => setCopiedField(null), 2000);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -140,17 +151,35 @@ export default function Contact() {
                       </svg>
                     </a>
                   </div>
-                  <div className="ml-4 transition-all duration-300 group-hover:translate-x-2">
+                  <div className="ml-4 flex-1 transition-all duration-300 group-hover:translate-x-2">
                     <span className="block text-xs uppercase tracking-wider text-[rgba(var(--color-text-primary-light),0.6)] mb-1">Email</span>
-                    <a
-                      href="mailto:abhi.swame@gmail.com"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-sm md:text-base text-[rgb(var(--color-text-primary-light))] hover:text-[rgb(var(--color-text-primary-dark))] transition-colors duration-300"
-                      id="contact-email"
-                    >
-                      abhi.swame@gmail.com
-                    </a>
+                    <div className="flex items-center gap-2">
+                      <a
+                        href="mailto:abhi.swame@gmail.com"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-sm md:text-base text-[rgb(var(--color-text-primary-light))] hover:text-[rgb(var(--color-text-primary-dark))] transition-colors duration-300"
+                        id="contact-email"
+                      >
+                        abhi.swame@gmail.com
+                      </a>
+                      <button
+                        onClick={() => handleCopy('abhi.swame@gmail.com', 'email')}
+                        className="p-1 rounded-md hover:bg-[rgba(var(--color-background-primary-light),0.3)] transition-colors duration-200"
+                        title="Copy email"
+                      >
+                        {copiedField === 'email' ? (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="20,6 9,17 4,12"></polyline>
+                          </svg>
+                        ) : (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-[rgb(var(--color-text-primary-light))]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                          </svg>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -188,7 +217,7 @@ export default function Contact() {
                   <div className="relative">
                     <div className="absolute inset-0 bg-[rgba(var(--color-background-dark),0.2)] rounded-full transform scale-0 group-hover:scale-125 transition-transform duration-300 opacity-0 group-hover:opacity-100"></div>
                     <a
-                      href="https://www.linkedin.com/in/abhishek-swami/"
+                      href="https://www.linkedin.com/in/abhi-swami/"
                       target="_blank"
                       rel="noreferrer"
                       className="relative inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[rgb(var(--color-background-secondary-dark))] to-[rgb(var(--color-background-secondary-light))] text-[rgb(var(--color-text-secondary-light))] transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[rgba(var(--color-background-secondary-dark),0.4)]"
@@ -201,7 +230,7 @@ export default function Contact() {
                   <div className="ml-4 transition-all duration-300 group-hover:translate-x-2">
                     <span className="block text-xs uppercase tracking-wider text-[rgba(var(--color-text-primary-light),0.6)] mb-1">LinkedIn</span>
                     <a
-                      href="https://www.linkedin.com/in/abhishek-swami/"
+                      href="https://www.linkedin.com/in/abhi-swami/"
                       target="_blank"
                       rel="noreferrer"
                       className="text-sm md:text-base text-[rgb(var(--color-text-primary-light))] hover:text-[rgb(var(--color-text-primary-dark))] transition-colors duration-300"
@@ -225,15 +254,33 @@ export default function Contact() {
                       </svg>
                     </a>
                   </div>
-                  <div className="ml-4 transition-all duration-300 group-hover:translate-x-2">
+                  <div className="ml-4 flex-1 transition-all duration-300 group-hover:translate-x-2">
                     <span className="block text-xs uppercase tracking-wider text-[rgba(var(--color-text-primary-light),0.6)] mb-1">Phone</span>
-                    <a
-                      href="tel:+917996133571"
-                      className="text-sm md:text-base text-[rgb(var(--color-text-primary-light))] hover:text-[rgb(var(--color-text-primary-dark))] transition-colors duration-300"
-                      id="contact-phone"
-                    >
-                      +91 7996133571
-                    </a>
+                    <div className="flex items-center gap-2">
+                      <a
+                        href="tel:+917996133571"
+                        className="text-sm md:text-base text-[rgb(var(--color-text-primary-light))] hover:text-[rgb(var(--color-text-primary-dark))] transition-colors duration-300"
+                        id="contact-phone"
+                      >
+                        +91 7996133571
+                      </a>
+                      <button
+                        onClick={() => handleCopy('+917996133571', 'phone')}
+                        className="p-1 rounded-md hover:bg-[rgba(var(--color-background-primary-light),0.3)] transition-colors duration-200"
+                        title="Copy phone"
+                      >
+                        {copiedField === 'phone' ? (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="20,6 9,17 4,12"></polyline>
+                          </svg>
+                        ) : (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-[rgb(var(--color-text-primary-light))]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                          </svg>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
