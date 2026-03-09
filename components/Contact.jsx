@@ -136,7 +136,7 @@ export default function Contact() {
 
               <div className="space-y-6">
                 {/* Email */}
-                <div className="group flex items-center p-4 rounded-xl transition-all duration-300 hover:bg-[rgba(var(--color-background-primary-light),0.6)]">
+                <div className="group flex items-center p-4 rounded-xl transition-all duration-300 lg:hover:bg-[rgba(var(--color-background-primary-light),0.6)]">
                   <div className="relative">
                     <div className="absolute inset-0 bg-[rgba(var(--color-background-dark),0.2)] rounded-full transform scale-0 group-hover:scale-125 transition-transform duration-300 opacity-0 group-hover:opacity-100"></div>
                     <a
@@ -151,21 +151,21 @@ export default function Contact() {
                       </svg>
                     </a>
                   </div>
-                  <div className="ml-4 flex-1 transition-all duration-300 group-hover:translate-x-2">
+                  <div className="ml-4 flex-1 transition-all duration-300 lg:group-hover:translate-x-2">
                     <span className="block text-xs uppercase tracking-wider text-[rgba(var(--color-text-primary-light),0.6)] mb-1">Email</span>
                     <div className="flex items-center gap-2">
                       <a
                         href="mailto:abhi.swame@gmail.com"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-sm md:text-base text-[rgb(var(--color-text-primary-light))] hover:text-[rgb(var(--color-text-primary-dark))] transition-colors duration-300"
+                        className="text-sm md:text-base text-[rgb(var(--color-text-primary-light))] lg:hover:text-[rgb(var(--color-text-primary-dark))] transition-colors duration-300"
                         id="contact-email"
                       >
                         abhi.swame@gmail.com
                       </a>
                       <button
                         onClick={() => handleCopy('abhi.swame@gmail.com', 'email')}
-                        className="p-1 rounded-md hover:bg-[rgba(var(--color-background-primary-light),0.3)] transition-colors duration-200"
+                        className="p-1 rounded-md lg:hover:bg-[rgba(var(--color-background-primary-light),0.3)] transition-colors duration-200"
                         title="Copy email"
                       >
                         {copiedField === 'email' ? (
@@ -184,7 +184,7 @@ export default function Contact() {
                 </div>
 
                 {/* GitHub */}
-                <div className="group flex items-center p-4 rounded-xl transition-all duration-300 hover:bg-[rgba(var(--color-background-primary-light),0.6)]">
+                <div className="group flex items-center p-4 rounded-xl transition-all duration-300 lg:hover:bg-[rgba(var(--color-background-primary-light),0.6)]">
                   <div className="relative">
                     <div className="absolute inset-0 bg-[rgba(var(--color-background-dark),0.2)] rounded-full transform scale-0 group-hover:scale-125 transition-transform duration-300 opacity-0 group-hover:opacity-100"></div>
                     <a
@@ -198,7 +198,7 @@ export default function Contact() {
                       </svg>
                     </a>
                   </div>
-                  <div className="ml-4 transition-all duration-300 group-hover:translate-x-2">
+                  <div className="ml-4 transition-all duration-300 lg:group-hover:translate-x-2">
                     <span className="block text-xs uppercase tracking-wider text-[rgba(var(--color-text-primary-light),0.6)] mb-1">GitHub</span>
                     <a
                       href="https://github.com/abhi-swami"
@@ -213,7 +213,7 @@ export default function Contact() {
                 </div>
 
                 {/* LinkedIn */}
-                <div className="group flex items-center p-4 rounded-xl transition-all duration-300 hover:bg-[rgba(var(--color-background-primary-light),0.6)]">
+                <div className="group flex items-center p-4 rounded-xl transition-all duration-300 lg:hover:bg-[rgba(var(--color-background-primary-light),0.6)]">
                   <div className="relative">
                     <div className="absolute inset-0 bg-[rgba(var(--color-background-dark),0.2)] rounded-full transform scale-0 group-hover:scale-125 transition-transform duration-300 opacity-0 group-hover:opacity-100"></div>
                     <a
@@ -227,7 +227,7 @@ export default function Contact() {
                       </svg>
                     </a>
                   </div>
-                  <div className="ml-4 transition-all duration-300 group-hover:translate-x-2">
+                  <div className="ml-4 transition-all duration-300 lg:group-hover:translate-x-2">
                     <span className="block text-xs uppercase tracking-wider text-[rgba(var(--color-text-primary-light),0.6)] mb-1">LinkedIn</span>
                     <a
                       href="https://www.linkedin.com/in/abhi-swami/"
@@ -242,9 +242,9 @@ export default function Contact() {
                 </div>
 
                 {/* Phone */}
-                <div className="group flex items-center p-4 rounded-xl transition-all duration-300 hover:bg-[rgba(var(--color-background-primary-light),0.6)]">
+                <div className="group flex items-center p-4 rounded-xl transition-all duration-300 lg:hover:bg-[rgba(var(--color-background-primary-light),0.6)]">
                   <div className="relative">
-                    <div className="absolute inset-0 bg-[rgba(var(--color-background-dark),0.2)] rounded-full transform scale-0 group-hover:scale-125 transition-transform duration-300 opacity-0 group-hover:opacity-100"></div>
+                    <div className="absolute inset-0 bg-[rgba(var(--color-background-dark),0.2)] rounded-full transform scale-0 lg:group-hover:scale-125 transition-transform duration-300 opacity-0 group-hover:opacity-100"></div>
                     <a
                       href="tel:+917996133571"
                       className="relative inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[rgb(var(--color-background-secondary-dark))] to-[rgb(var(--color-background-secondary-light))] text-[rgb(var(--color-text-secondary-light))] transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[rgba(var(--color-background-secondary-dark),0.4)]"
@@ -254,19 +254,19 @@ export default function Contact() {
                       </svg>
                     </a>
                   </div>
-                  <div className="ml-4 flex-1 transition-all duration-300 group-hover:translate-x-2">
+                  <div className="ml-4 flex-1 transition-all duration-300 lg:group-hover:translate-x-2">
                     <span className="block text-xs uppercase tracking-wider text-[rgba(var(--color-text-primary-light),0.6)] mb-1">Phone</span>
                     <div className="flex items-center gap-2">
                       <a
                         href="tel:+917996133571"
-                        className="text-sm md:text-base text-[rgb(var(--color-text-primary-light))] hover:text-[rgb(var(--color-text-primary-dark))] transition-colors duration-300"
+                        className="text-sm md:text-base text-[rgb(var(--color-text-primary-light))] lg:hover:text-[rgb(var(--color-text-primary-dark))] transition-colors duration-300"
                         id="contact-phone"
                       >
                         +91 7996133571
                       </a>
                       <button
                         onClick={() => handleCopy('+917996133571', 'phone')}
-                        className="p-1 rounded-md hover:bg-[rgba(var(--color-background-primary-light),0.3)] transition-colors duration-200"
+                        className="p-1 rounded-md lg:hover:bg-[rgba(var(--color-background-primary-light),0.3)] transition-colors duration-200"
                         title="Copy phone"
                       >
                         {copiedField === 'phone' ? (
