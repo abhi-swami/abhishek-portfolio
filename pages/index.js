@@ -26,13 +26,13 @@ export default function Home() {
         <meta property="og:title" content="Abhishek Swami - Full Stack Developer" />
         <meta property="og:description" content="Full-stack developer specializing in Next.js, React, and Tailwind CSS. Passionate about creating innovative web solutions." />
         <meta property="og:url" content="https://abhi-swami.in" />
-        <meta property="og:image" content="/hero.webp" />
+        <meta property="og:image" content="https://pub-19394998e7f349069f6dadeecc9a4994.r2.dev/hero-modified.png" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:title" content="Abhishek Swami - Full Stack Developer" />
         <meta property="twitter:description" content="Full-stack developer specializing in Next.js, React, and Tailwind CSS. Passionate about creating innovative web solutions." />
-        <meta property="twitter:image" content="/hero.webp" />
+        <meta property="twitter:image" content="https://pub-19394998e7f349069f6dadeecc9a4994.r2.dev/hero-modified.png" />
         
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
