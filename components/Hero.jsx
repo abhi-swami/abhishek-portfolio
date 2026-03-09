@@ -12,7 +12,7 @@ const prompt = Prompt({
 
 const HeroSection = () => {
   return (
-    <div className="relative xs:max-h-[90vh] md:min-h-screen w-full overflow-hidden">
+    <div className="relative xs:min-h-screen md:min-h-screen w-full overflow-hidden">
       {/* Background with overlay - Adjusted for face visibility */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -54,20 +54,20 @@ const HeroSection = () => {
             solutions that solve real-world problems.
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-2 sm:gap-3 lg:gap-4">
             <Link
               href="/projects"
-              className="px-6 py-3 border-2 border-[rgb(var(--color-primary))] 
+              className="px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 text-xs sm:text-sm md:text-base border-2 border-[rgb(var(--color-primary))] 
               bg-[rgb(var(--color-primary))] 
-              text-black font-semibold hover:opacity-90 transition"
+              text-black font-semibold hover:opacity-90 transition whitespace-nowrap"
             >
               View My Work
             </Link>
 
             <Link
-              href="/contact"
-              className="px-6 py-3 border-2 border-[rgb(var(--color-primary))] 
-              text-white hover:bg-[rgba(var(--color-primary),0.1)] transition"
+              href="#contact"
+              className="px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 text-xs sm:text-sm md:text-base border-2 border-[rgb(var(--color-primary))] 
+              text-white hover:bg-[rgba(var(--color-primary),0.1)] transition whitespace-nowrap"
             >
               Contact Me
             </Link>
