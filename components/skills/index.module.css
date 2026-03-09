@@ -54,18 +54,42 @@
 }
 
 /* Icon color classes - unchanged */
-.html { color: #E44D26; }
-.css { color: #264DE4; }
-.javascript { color: #F7DF1E; }
-.typescript { color: #3178C6; }
-.react { color: #61DAFB; }
-.chakraui { color: #319795; }
-.redux { color: #764ABC; }
-.nodejs { color: #339933; }
-.mongodb { color: #47A248; }
-.npm { color: #CB3837; }
-.vscode { color: #007ACC; }
-.express { color: white !important; }
+.html {
+  color: #e44d26;
+}
+.css {
+  color: #264de4;
+}
+.javascript {
+  color: #f7df1e;
+}
+.typescript {
+  color: #3178c6 !important;
+}
+.react {
+  color: #61dafb;
+}
+.chakraui {
+  color: #319795;
+}
+.redux {
+  color: #764abc;
+}
+.nodejs {
+  color: #339933;
+}
+.mongodb {
+  color: #47a248;
+}
+.npm {
+  color: #cb3837;
+}
+.vscode {
+  color: #007acc;
+}
+.express {
+  color: white !important;
+}
 .github {
   color: white !important;
   background-color: black;
@@ -80,11 +104,11 @@
     height: 135px;
     border-radius: 8px;
   }
-  
+
   .slidePrev {
     transform: scale(0.85) translateX(-65%);
   }
-  
+
   .slideNext {
     transform: scale(0.85) translateX(65%);
   }
@@ -98,24 +122,25 @@
     padding: 1rem;
     border-radius: 10px;
   }
-  
+
   .slidePrev {
     transform: scale(0.85) translateX(-75%);
   }
-  
+
   .slideNext {
     transform: scale(0.85) translateX(75%);
   }
-  
-  .slideFarPrev, .slideFarNext {
+
+  .slideFarPrev,
+  .slideFarNext {
     display: flex;
     opacity: 0.7;
   }
-  
+
   .slideFarPrev {
     transform: scale(0.7) translateX(-130%);
   }
-  
+
   .slideFarNext {
     transform: scale(0.7) translateX(130%);
   }
@@ -128,21 +153,20 @@
     height: 180px;
     padding: 1.25rem;
   }
-  
+
   .slidePrev {
     transform: scale(0.9) translateX(-80%);
   }
-  
+
   .slideNext {
     transform: scale(0.9) translateX(80%);
-    
   }
-  
+
   .slideFarPrev {
     transform: scale(0.75) translateX(-150%);
     display: flex;
   }
-  
+
   .slideFarNext {
     transform: scale(0.75) translateX(150%);
     display: flex;
@@ -156,19 +180,19 @@
     height: 200px;
     padding: 0.5rem;
   }
-  
+
   .slidePrev {
     transform: scale(0.9) translateX(-90%);
   }
-  
+
   .slideNext {
     transform: scale(0.9) translateX(90%);
   }
-  
+
   .slideFarPrev {
     transform: scale(0.8) translateX(-170%);
   }
-  
+
   .slideFarNext {
     transform: scale(0.8) translateX(170%);
   }
@@ -179,15 +203,15 @@
   .slidePrev {
     transform: scale(0.9) translateX(-95%);
   }
-  
+
   .slideNext {
     transform: scale(0.9) translateX(95%);
   }
-  
+
   .slideFarPrev {
     transform: scale(0.8) translateX(-180%);
   }
-  
+
   .slideFarNext {
     transform: scale(0.8) translateX(180%);
   }

@@ -138,7 +138,7 @@ export default function Contact() {
                 {/* Email */}
                 <div className="group flex items-center p-4 rounded-xl transition-all duration-300 lg:hover:bg-[rgba(var(--color-background-primary-light),0.6)]">
                   <div className="relative">
-                    <div className="absolute inset-0 bg-[rgba(var(--color-background-dark),0.2)] rounded-full transform scale-0 group-hover:scale-125 transition-transform duration-300 opacity-0 group-hover:opacity-100"></div>
+                    <div className="absolute inset-0 bg-[rgba(var(--color-background-dark),0.2)] rounded-full transform scale-0 lg:group-hover:scale-125 transition-transform duration-300 opacity-0 group-hover:opacity-100"></div>
                     <a
                       href="mailto:abhi.swame@gmail.com"
                       target="_blank"
