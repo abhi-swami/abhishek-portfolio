@@ -19,7 +19,7 @@ const HeroSection = () => {
           src="/hero.webp"
           alt="Hero background"
           fill
-          className="object-cover xs:object-[85%_90%] lg:object-center"
+          className="object-cover xs:object-[70%_90%] lg:object-center"
           priority
           sizes="100vw"
           quality={90}
