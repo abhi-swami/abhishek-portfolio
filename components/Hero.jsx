@@ -17,7 +17,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 z-0">
         <Image
           src="/hero.webp"
-          alt="Hero background"
+          alt="abhishek swami"
           fill
           className="object-cover xs:object-[70%_90%] lg:object-center"
           priority
