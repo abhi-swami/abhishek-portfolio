@@ -1,8 +1,11 @@
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+  const touchStartY = useRef(0);
+  const [activeLinkIndex, setActiveLinkIndex] = useState(null);
   
   // Close menu when clicking outside
   useEffect(() => {
@@ -30,6 +33,42 @@ export default function Navbar() {
       document.body.style.overflow = 'auto';
     };
   }, [isMenuOpen]);
+
+  // Haptic feedback for mobile
+  const triggerHaptic = () => {
+    if (typeof window !== 'undefined' && navigator.vibrate) {
+      navigator.vibrate(10);
+    }
+  };
+
+  // Handle touch start on menu
+  const handleTouchStart = (e) => {
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  // Handle touch end to detect swipe up to close
+  const handleTouchEnd = (e) => {
+    const touchEndY = e.changedTouches[0].clientY;
+    const difference = touchStartY.current - touchEndY;
+
+    // Swipe up to close (50px threshold)
+    if (difference > 50 && isMenuOpen) {
+      triggerHaptic();
+      setIsMenuOpen(false);
+    }
+  };
+
+  // Handle link click with haptic feedback
+  const handleLinkClick = () => {
+    triggerHaptic();
+    setIsMenuOpen(false);
+  };
+
+  // Handle hamburger button press
+  const handleMenuToggle = () => {
+    triggerHaptic();
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <>
@@ -101,8 +140,8 @@ export default function Navbar() {
 
           {/* Four-dot Hamburger Button */}
           <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden flex items-center justify-center p-1.5 focus:outline-none bg-[rgb(var(--color-card))] rounded w-9 h-9 z-50"
+            onClick={handleMenuToggle}
+            className="md:hidden flex items-center justify-center p-2 focus:outline-none bg-[rgb(var(--color-card))] rounded-lg w-10 h-10 z-50 active:scale-95 transition-transform duration-150 touch-none"
             aria-label="Toggle menu"
           >
             <div className={`grid grid-cols-2 gap-1 transition-transform duration-500 ${isMenuOpen ? 'rotate-90' : ''}`}>
@@ -117,33 +156,36 @@ export default function Navbar() {
 
       {/* Mobile Menu - Full Width Sliding from Top */}
       <div 
+        ref={menuRef}
         className={`mobile-menu fixed top-15 left-0 right-0 bottom-0 w-full bg-[rgb(var(--color-background-primary-light))] md:hidden z-60 transform transition-all duration-600 linear ${
           isMenuOpen 
             ? 'translate-y-0 opacity-100' 
             : 'translate-y-[-150%] opacity-0'
         }`}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         <div className="pt-12 pb-6 px-6 h-full flex flex-col justify-between">
           {/* Menu Links */}
-          <div className="flex flex-col space-y-6">
+          <div className="flex flex-col space-y-3">
             <a 
               href="#projects" 
-              className="text-lg font-medium hover:text-[rgb(var(--color-primary))] transition-colors flex justify-between items-center"
-              onClick={() => setIsMenuOpen(false)}
+              className="text-lg font-medium hover:text-[rgb(var(--color-primary))] active:bg-[rgba(var(--color-primary),0.1)] transition-all flex justify-between items-center px-4 py-3 rounded-lg active:scale-95 duration-150 touch-none select-none"
+              onClick={handleLinkClick}
             >
               Projects
             </a>
             <a 
               href="#skills" 
-              className="text-lg font-medium hover:text-[rgb(var(--color-primary))] transition-colors flex justify-between items-center"
-              onClick={() => setIsMenuOpen(false)}
+              className="text-lg font-medium hover:text-[rgb(var(--color-primary))] active:bg-[rgba(var(--color-primary),0.1)] transition-all flex justify-between items-center px-4 py-3 rounded-lg active:scale-95 duration-150 touch-none select-none"
+              onClick={handleLinkClick}
             >
               Skills
             </a>
             <a 
               href="#about" 
-              className="text-lg font-medium hover:text-[rgb(var(--color-primary))] transition-colors flex justify-between items-center"
-              onClick={() => setIsMenuOpen(false)}
+              className="text-lg font-medium hover:text-[rgb(var(--color-primary))] active:bg-[rgba(var(--color-primary),0.1)] transition-all flex justify-between items-center px-4 py-3 rounded-lg active:scale-95 duration-150 touch-none select-none"
+              onClick={handleLinkClick}
             >
               About
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -152,8 +194,8 @@ export default function Navbar() {
             </a>
             <a 
               href="#contact" 
-              className="text-lg font-medium hover:text-[rgb(var(--color-primary))] transition-colors flex justify-between items-center"
-              onClick={() => setIsMenuOpen(false)}
+              className="text-lg font-medium hover:text-[rgb(var(--color-primary))] active:bg-[rgba(var(--color-primary),0.1)] transition-all flex justify-between items-center px-4 py-3 rounded-lg active:scale-95 duration-150 touch-none select-none"
+              onClick={handleLinkClick}
             >
               Contact
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -164,31 +206,33 @@ export default function Navbar() {
           
           {/* Social Links */}
           <div className="mt-auto pt-6 border-t border-gray-700">
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-3">
               <a 
-                href="https://github.com/yourusername" 
+                href="https://github.com/abhi-swami" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-lg font-medium hover:text-[rgb(var(--color-primary))] transition-colors"
+                className="text-lg font-medium px-4 py-3 rounded-lg active:bg-[rgba(var(--color-primary),0.1)] hover:text-[rgb(var(--color-primary))] transition-all active:scale-95 duration-150 touch-none select-none"
+                onClick={triggerHaptic}
               >
                 GitHub
               </a>
               <a 
-                href="https://linkedin.com/in/yourusername" 
+                href="https://linkedin.com/in/abhi-swami" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-lg font-medium hover:text-[rgb(var(--color-primary))] transition-colors"
+                className="text-lg font-medium px-4 py-3 rounded-lg active:bg-[rgba(var(--color-primary),0.1)] hover:text-[rgb(var(--color-primary))] transition-all active:scale-95 duration-150 touch-none select-none"
+                onClick={triggerHaptic}
               >
                 LinkedIn
               </a>
-              <a 
+              {/* <a 
                 href="https://twitter.com/yourusername" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-lg font-medium hover:text-[rgb(var(--color-primary))] transition-colors"
+                className="text-lg font-medium"
               >
                 Twitter
-              </a>
+              </a> */}
             </div>
           </div>
         </div>
