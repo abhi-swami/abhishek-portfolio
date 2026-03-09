@@ -20,8 +20,18 @@ const SkillIcons = {
   ),
   TypeScript: (props) => (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <rect width="24" height="24" fill="#3178C6" rx="2" />
-      <text x="12" y="16" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="12" fontWeight="bold" fill="white">TS</text>
+      <rect width="24" height="24" fill="currentColor" rx="2" />
+      <text
+        x="14"
+        y="20"
+        textAnchor="middle"
+        fontFamily="Arial, sans-serif"
+        fontSize="14"
+        fontWeight="bold"
+        fill={`${props.className.includes("typescript") ? "white" : "black"}`}
+      >
+        TS
+      </text>
     </svg>
   ),
   React: (props) => (
@@ -115,9 +125,11 @@ export default function SkillsSection() {
     const position = (index - activeIndex + totalSkills) % totalSkills;
 
     if (position === 0) return styles.slideActive;
-    if (position === 1 || position === totalSkills - 1) return position === 1 ? styles.slideNext : styles.slidePrev;
-    if (position === 2 || position === totalSkills - 2) return position === 2 ? styles.slideFarNext : styles.slideFarPrev;
-    return '';
+    if (position === 1 || position === totalSkills - 1)
+      return position === 1 ? styles.slideNext : styles.slidePrev;
+    if (position === 2 || position === totalSkills - 2)
+      return position === 2 ? styles.slideFarNext : styles.slideFarPrev;
+    return "";
   };
 
   return (
@@ -159,7 +171,7 @@ export default function SkillsSection() {
                   onClick={() => goToSlide(index)}
                   tabIndex={slideClass === styles.slideActive ? 0 : -1}
                   role="button"
-                  aria-label={`View ${skill.text} skill, ${index === activeIndex ? 'currently active' : ''}`}
+                  aria-label={`View ${skill.text} skill, ${index === activeIndex ? "currently active" : ""}`}
                 >
                   <div className="w-10 h-10 xs:w-12 xs:h-12 sm:w-16 sm:h-16 md:w-16 md:h-16 lg:w-20 lg:h-20 flex items-center justify-center mb-2 xs:mb-3 sm:mb-4 md:mb-4 lg:mb-6">
                     <IconComponent
@@ -199,10 +211,11 @@ export default function SkillsSection() {
             {skills.map((skill, index) => (
               <button
                 key={index}
-                className={`w-1.5 h-1.5 xs:w-2 xs:h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-300 ${index === activeIndex
-                    ? 'bg-[rgb(var(--color-primary))] scale-110'
-                    : 'bg-[rgb(var(--color-text-primary-light))] bg-opacity-30'
-                  }`}
+                className={`w-1.5 h-1.5 xs:w-2 xs:h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-300 ${
+                  index === activeIndex
+                    ? "bg-[rgb(var(--color-primary))] scale-110"
+                    : "bg-[rgb(var(--color-text-primary-light))] bg-opacity-30"
+                }`}
                 onClick={() => goToSlide(index)}
                 aria-label={`Go to slide ${index + 1}`}
                 aria-selected={index === activeIndex}

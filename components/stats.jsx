@@ -258,7 +258,7 @@ export default function Stats() {
   const [isVisible, setIsVisible] = useState(false);
 
   // Image URLs
-  const statsCardUrl = "https://github-readme-stats.vercel.app/api?username=abhi-swami&theme=graywhite&show_icons=true&icon_color=37D5BE&text_color=1F1F1F&hide_border=true";
+  const statsCardUrl = "https://github-readme-stats-sigma-five.vercel.app/api?username=abhi-swami&show_icons=true&theme=graywhite&show_icons=true&icon_color=37D5BE&text_color=1F1F1F&hide_border=true";
   const streakStatsUrl = "https://github-readme-streak-stats.herokuapp.com?user=abhi-swami&theme=graywhite&ring=37D5BE&fire=37D5BE&hide_border=true";
   const contributionGraphUrl = "https://github-readme-activity-graph.vercel.app/graph?username=abhi-swami&theme=graywhite&bg_color=F8F8F8&color=1F1F1F&line=37D5BE&point=1D8979&hide_border=true&area=true&area_color=8BE7D9";
 
