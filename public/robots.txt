@@ -1,0 +1,6 @@
+# Allow all crawlers full access
+User-agent: *
+Allow: /
+
+# Sitemap reference (update domain if necessary)
+Sitemap: https://abhi-swami.in/sitemap.xml
