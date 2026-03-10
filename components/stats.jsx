@@ -126,7 +126,7 @@ const FullscreenView = ({ src, title, onClose }) => {
                 alt={`${title} (Fullscreen)`}
                 fill
                 className="object-contain rounded-lg"
-                onLoadingComplete={handleLoad}
+                onLoad={handleLoad}
                 onError={handleError}
                 unoptimized={true} // For external URLs
               />
@@ -165,7 +165,7 @@ const FullscreenView = ({ src, title, onClose }) => {
                 alt={`${title} (Fullscreen)`}
                 fill
                 className="object-contain rounded-lg"
-                onLoadingComplete={handleLoad}
+                onLoad={handleLoad}
                 onError={handleError}
                 unoptimized={true} // For external URLs
               />
@@ -230,7 +230,7 @@ const StatImage = ({ src, title, className }) => {
               alt={title}
               fill
               className="object-contain"
-              onLoadingComplete={handleLoad}
+              onLoad={handleLoad}
               onError={handleError}
               unoptimized={true} // For external URLs
             />
