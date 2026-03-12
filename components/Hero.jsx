@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "./Navbar";
 import { Prompt } from "next/font/google";
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 const prompt = Prompt({
   variable: "--font-prompt",
@@ -55,14 +56,38 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-wrap gap-2 sm:gap-3 lg:gap-4">
-            <Link
-              href="/projects"
-              className="px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 text-xs sm:text-sm md:text-base border-2 border-[rgb(var(--color-primary))] 
-              bg-[rgb(var(--color-primary))] 
-              text-black font-semibold hover:opacity-90 transition whitespace-nowrap"
-            >
-              View My Work
-            </Link>
+            {/* project dialog trigger */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <button
+                  className="px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 text-xs sm:text-sm md:text-base border-2 border-[rgb(var(--color-primary))] 
+                  bg-[rgb(var(--color-primary))] 
+                  text-black font-semibold hover:opacity-90 transition whitespace-nowrap"
+                >
+                  View My Work
+                </button>
+              </DialogTrigger>
+              <DialogContent className={"border border-red-300"}>
+                <DialogHeader>
+                  <DialogTitle>My Projects</DialogTitle>
+                  <DialogDescription>
+                    A selection of my recent work. Click any card to view details.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="grid gap-4 mt-4">
+                  {/* replace these with real project cards */}
+                  <a href="https://github.com/abhi-swami/project1" target="_blank" rel="noopener noreferrer" className="block p-4 rounded-lg bg-[rgb(var(--color-background-secondary-light))] hover:bg-[rgb(var(--color-background-secondary-light))]/90 transition">
+                    <h3 className="font-semibold">Project One </h3>
+                    <p className="text-sm text-muted-foreground">Description of project one.</p>
+                  </a>
+                  <a href="https://github.com/abhi-swami/project2" target="_blank" rel="noopener noreferrer" className="block p-4 rounded-lg bg-[rgb(var(--color-background-secondary-light))] hover:bg-[rgb(var(--color-background-secondary-light))]/90 transition">
+                    <h3 className="font-semibold">Project Two</h3>
+                    <p className="text-sm text-muted-foreground">Description of project two.</p>
+                  </a>
+                </div>
+                {/* <DialogFooter showCloseButton /> */}
+              </DialogContent>
+            </Dialog>
 
             <Link
               href="#contact"
