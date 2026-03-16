@@ -3,7 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "./Navbar";
 import { Prompt } from "next/font/google";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 const prompt = Prompt({
   variable: "--font-prompt",
@@ -11,9 +18,30 @@ const prompt = Prompt({
   subsets: ["latin"],
 });
 
+const projects = [
+  {
+    title: "EduvateAI",
+    description:
+      "A platform offering smart answers to science and math queries, career counselling, and interactive worksheets for students",
+    techStack: ["Next.js", "Redux", "Shadn"],
+    image: "/hero.webp",
+    github: "https://github.com/abhi-swami/eduvateai",
+    live: "https://eduvateai.com/",
+  },
+  {
+    title: "Medicare Plus",
+    description:
+      "Clone of an India-based pharmaceutical e-commerce website.",
+    techStack: ["React", "JavaScript", "Tailwind CSS", "Responsive Design"],
+    image: "/abh-image.png",
+    github: "https://github.com/SaurabhBH123/medicare-plus",
+    live: "https://frontend-seven-mauve.vercel.app/",
+  },
+];
+
 const HeroSection = () => {
   return (
-    <div className="relative xs:min-h-screen md:min-h-screen w-full overflow-hidden">
+    <div className="relative xs:min-h-screen md:min-h-screen w-full md:overflow-hidden">
       {/* Background with overlay - Adjusted for face visibility */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -67,23 +95,76 @@ const HeroSection = () => {
                   View My Work
                 </button>
               </DialogTrigger>
-              <DialogContent className={"border border-red-300"}>
+              <DialogContent className="max-w-5xl border border-[rgb(var(--color-primary))]/30 bg-[rgb(var(--color-card))] text-[rgb(var(--color-text-primary-light))]">
                 <DialogHeader>
                   <DialogTitle>My Projects</DialogTitle>
-                  <DialogDescription>
-                    A selection of my recent work. Click any card to view details.
-                  </DialogDescription>
+                  {/* <DialogDescription>
+                    A selection of my recent work with live previews and source code.
+                  </DialogDescription> */}
                 </DialogHeader>
-                <div className="grid gap-4 mt-4">
-                  {/* replace these with real project cards */}
-                  <a href="https://github.com/abhi-swami/project1" target="_blank" rel="noopener noreferrer" className="block p-4 rounded-lg bg-[rgb(var(--color-background-secondary-light))] hover:bg-[rgb(var(--color-background-secondary-light))]/90 transition">
-                    <h3 className="font-semibold">Project One </h3>
-                    <p className="text-sm text-muted-foreground">Description of project one.</p>
-                  </a>
-                  <a href="https://github.com/abhi-swami/project2" target="_blank" rel="noopener noreferrer" className="block p-4 rounded-lg bg-[rgb(var(--color-background-secondary-light))] hover:bg-[rgb(var(--color-background-secondary-light))]/90 transition">
-                    <h3 className="font-semibold">Project Two</h3>
-                    <p className="text-sm text-muted-foreground">Description of project two.</p>
-                  </a>
+                <div className="mt-4 grid gap-5 md:grid-cols-2">
+                  {projects.map((project) => (
+                    <article
+                      key={project.title}
+                      className="overflow-hidden rounded-xl border border-white/10 bg-[rgb(var(--color-background-secondary-light))] shadow-lg"
+                    >
+                      <div className="relative h-48 w-full">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                      </div>
+
+                      <div className="space-y-4 p-5">
+                        <div>
+                          <h3 className="text-xl font-semibold text-[rgb(var(--color-text-secondary-light))]">
+                            {project.title}
+                          </h3>
+                          <p className="mt-2 text-sm leading-6 text-[rgb(var(--color-text-secondary-light))]">
+                            {project.description}
+                          </p>
+                        </div>
+
+                        <div>
+                          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--color-primary))]">
+                            Tech Stack
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {project.techStack.map((tech) => (
+                              <span
+                                key={tech}
+                                className="border border-[rgb(var(--color-primary))]/30 px-3 py-1 text-xs text-[rgb(var(--color-text-secondary-light))]"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="flex flex-wrap gap-3 pt-2">
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center border border-[rgb(var(--color-primary))] px-4 py-2 text-sm font-medium text-[rgb(var(--color-text-secondary-light))] transition hover:bg-[rgba(var(--color-primary),0.12)]"
+                          >
+                            GitHub
+                          </a>
+                          <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center bg-[rgb(var(--color-primary))] px-4 py-2 text-sm font-semibold text-black transition hover:opacity-90"
+                          >
+                            Live Preview
+                          </a>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
                 </div>
                 {/* <DialogFooter showCloseButton /> */}
               </DialogContent>
