@@ -14,7 +14,7 @@ function Dialog({
 function DialogTrigger({
   ...props
 }) {
-  console.log("dialogTigger",props)
+  // console.log("dialogTigger",props)
   return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />;
 }
 
@@ -34,7 +34,7 @@ function DialogOverlay({
   className,
   ...props
 }) {
-  console.log("props",props)
+  // console.log("props",props)
   return (
     <DialogPrimitive.Overlay
       data-slot="dialog-overlay"
