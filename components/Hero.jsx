@@ -24,7 +24,7 @@ const projects = [
     description:
       "A platform offering smart answers to science and math queries, career counselling, and interactive worksheets for students",
     techStack: ["Next.js", "Redux", "Shadn"],
-    image: "/hero.webp",
+    image: "/eduvateai.png",
     github: "https://github.com/abhi-swami/eduvateai",
     live: "https://eduvateai.com/",
   },
@@ -33,7 +33,7 @@ const projects = [
     description:
       "Clone of an India-based pharmaceutical e-commerce website.",
     techStack: ["React", "JavaScript", "Tailwind CSS", "Responsive Design"],
-    image: "/abh-image.png",
+    image: "/medicare.png",
     github: "https://github.com/SaurabhBH123/medicare-plus",
     live: "https://frontend-seven-mauve.vercel.app/",
   },
@@ -95,20 +95,21 @@ const HeroSection = () => {
                   View My Work
                 </button>
               </DialogTrigger>
-              <DialogContent className="max-w-5xl border border-[rgb(var(--color-primary))]/30 bg-[rgb(var(--color-card))] text-[rgb(var(--color-text-primary-light))]">
-                <DialogHeader>
+              <DialogContent className="w-[calc(100vw-1rem)] max-w-5xl overflow-hidden border border-[rgb(var(--color-primary))]/30 bg-[rgb(var(--color-card))] p-0 text-[rgb(var(--color-text-primary-light))] sm:w-full sm:max-h-[90vh]">
+                <DialogHeader className="border-b border-white/10 px-4 py-4 sm:px-6">
                   <DialogTitle>My Projects</DialogTitle>
                   {/* <DialogDescription>
                     A selection of my recent work with live previews and source code.
                   </DialogDescription> */}
                 </DialogHeader>
-                <div className="mt-4 grid gap-5 md:grid-cols-2">
+                <div className="max-h-[calc(90vh-4.5rem)] overflow-y-auto px-4 py-4 sm:px-6">
+                  <div className="grid gap-3 sm:gap-5 md:grid-cols-2">
                   {projects.map((project) => (
                     <article
                       key={project.title}
                       className="overflow-hidden rounded-xl border border-white/10 bg-[rgb(var(--color-background-secondary-light))] shadow-lg"
                     >
-                      <div className="relative h-48 w-full">
+                      <div className="relative h-40 w-full sm:h-48">
                         <Image
                           src={project.image}
                           alt={project.title}
@@ -118,12 +119,12 @@ const HeroSection = () => {
                         />
                       </div>
 
-                      <div className="space-y-4 p-5">
+                      <div className="space-y-2 sm:space-y-4 p-2 sm:p-5">
                         <div>
-                          <h3 className="text-xl font-semibold text-[rgb(var(--color-text-secondary-light))]">
+                          <h3 className="text-lg font-semibold text-[rgb(var(--color-text-secondary-light))] sm:text-xl">
                             {project.title}
                           </h3>
-                          <p className="mt-2 text-sm leading-6 text-[rgb(var(--color-text-secondary-light))]">
+                          <p className="mt-1 sm:mt-2 text-sm leading-5 md:leading-6 text-[rgb(var(--color-text-secondary-light))]">
                             {project.description}
                           </p>
                         </div>
@@ -144,12 +145,12 @@ const HeroSection = () => {
                           </div>
                         </div>
 
-                        <div className="flex flex-wrap gap-3 pt-2">
+                        <div className="flex flex-row gap-3 pt-2 sm:flex-row sm:flex-wrap">
                           <a
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center border border-[rgb(var(--color-primary))] px-4 py-2 text-sm font-medium text-[rgb(var(--color-text-secondary-light))] transition hover:bg-[rgba(var(--color-primary),0.12)]"
+                            className="inline-flex w-full items-center justify-center border border-[rgb(var(--color-primary))] px-4 py-2 text-sm font-medium text-[rgb(var(--color-text-secondary-light))] transition hover:bg-[rgba(var(--color-primary),0.12)] sm:w-auto"
                           >
                             GitHub
                           </a>
@@ -157,7 +158,7 @@ const HeroSection = () => {
                             href={project.live}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center bg-[rgb(var(--color-primary))] px-4 py-2 text-sm font-semibold text-black transition hover:opacity-90"
+                            className="inline-flex w-full items-center justify-center bg-[rgb(var(--color-primary))] px-4 py-2 text-sm font-semibold text-black transition hover:opacity-90 sm:w-auto"
                           >
                             Live Preview
                           </a>
@@ -165,6 +166,7 @@ const HeroSection = () => {
                       </div>
                     </article>
                   ))}
+                  </div>
                 </div>
                 {/* <DialogFooter showCloseButton /> */}
               </DialogContent>
