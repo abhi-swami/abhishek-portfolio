@@ -10,6 +10,7 @@ const Skills = dynamic(() => import("@/components/skills/Skills"), {
 import AboutMe from "@/components/Aboutme";
 import Stats from "@/components/stats";
 import Contact from "@/components/Contact";
+import Projects from "@/components/Projects";
 
 const inter = Inter({ weight: "400", subsets: ["latin"] });
 
@@ -70,6 +71,7 @@ export default function Home() {
         <HeroSection />
         <AboutMe />
         <Skills />
+        <Projects/>
         <Stats />
         <Contact />
       </div>

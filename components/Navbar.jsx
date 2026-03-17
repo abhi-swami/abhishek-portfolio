@@ -143,7 +143,7 @@ export default function Navbar() {
         className={`fixed top-0 left-0 right-0 w-full py-1 xs:py-3 sm:py-5 md:py-4 px-3 xs:px-4 sm:px-6 md:px-8 z-60 transition-colors duration-300 ${
           isScrolled || isMenuOpen
             ? "bg-[rgb(var(--color-background-primary-light))]/75 backdrop-blur-md border-b border-black/10"
-            : "bg-transparent"
+            : "bg-transparent  border-black/10"
         }`}
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">

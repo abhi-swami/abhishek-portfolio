@@ -147,7 +147,10 @@ export default function SkillsSection() {
             </span>
           </h2>
           <p className="mt-2 xs:mt-3 sm:mt-4 text-sm xs:text-base sm:text-lg md:text-lg text-[rgb(var(--color-text-primary-dark))]">
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-white/70 sm:text-base sm:leading-7">
             Technologies I've been working with recently
+ 
           </p>
         </header>
 
