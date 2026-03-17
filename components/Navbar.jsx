@@ -3,9 +3,11 @@ import { useState, useEffect, useRef } from "react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [navHeight, setNavHeight] = useState(0);
   const menuRef = useRef(null);
+  const navRef = useRef(null);
   const touchStartY = useRef(0);
-  const [activeLinkIndex, setActiveLinkIndex] = useState(null);
 
   const resumeUrl =
     "https://pub-19394998e7f349069f6dadeecc9a4994.r2.dev/Abhishek-Swami-Resume.pdf";
@@ -64,6 +66,38 @@ export default function Navbar() {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 8);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!navRef.current || typeof window === "undefined") return;
+
+    const updateNavHeight = () => {
+      setNavHeight(navRef.current?.offsetHeight ?? 0);
+    };
+
+    updateNavHeight();
+
+    const resizeObserver = new ResizeObserver(updateNavHeight);
+    resizeObserver.observe(navRef.current);
+    window.addEventListener("resize", updateNavHeight);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateNavHeight);
+    };
+  }, []);
+
   // Haptic feedback for mobile
   const triggerHaptic = () => {
     if (typeof window !== "undefined" && navigator.vibrate) {
@@ -102,8 +136,15 @@ export default function Navbar() {
 
   return (
     <>
+      <div style={{ height: navHeight }} aria-hidden="true" />
+
       <nav
-        className={`w-full py-3 xs:py-4 sm:py-5 md:py-6 px-3 xs:px-4 sm:px-6 md:px-8 relative z-60 ${isMenuOpen ? "bg-[rgb(var(--color-background-primary-light))]" : ""}`}
+        ref={navRef}
+        className={`fixed top-0 left-0 right-0 w-full py-1 xs:py-3 sm:py-5 md:py-4 px-3 xs:px-4 sm:px-6 md:px-8 z-60 transition-colors duration-300 ${
+          isScrolled || isMenuOpen
+            ? "bg-[rgb(var(--color-background-primary-light))]/75 backdrop-blur-md border-b border-black/10"
+            : "bg-transparent"
+        }`}
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Logo */}
@@ -213,7 +254,8 @@ export default function Navbar() {
       {/* Mobile Menu - Full Width Sliding from Top */}
       <div
         ref={menuRef}
-        className={`mobile-menu fixed top-15 left-0 right-0 bottom-0 w-full bg-[rgb(var(--color-background-primary-light))] md:hidden z-60 transform transition-all duration-600 linear ${
+        style={{ top: navHeight }}
+        className={`mobile-menu fixed left-0 right-0 bottom-0 w-full bg-[rgb(var(--color-background-primary-light))] md:hidden z-50 transform transition-all duration-600 linear ${
           isMenuOpen
             ? "translate-y-0 opacity-100"
             : "translate-y-[-150%] opacity-0"
@@ -224,26 +266,40 @@ export default function Navbar() {
         <div className="pt-12 pb-6 px-6 h-full flex flex-col justify-between">
           {/* Menu Links */}
           <div className="flex flex-col space-y-3">
-            <a
+            {/* <a
               href="#projects"
               className="text-lg font-medium hover:text-[rgb(var(--color-primary))] active:bg-[rgba(var(--color-primary),0.1)] transition-all flex justify-between items-center px-4 py-3 rounded-lg active:scale-95 duration-150 touch-none select-none"
               onClick={handleLinkClick}
             >
               Projects
-            </a>
+            </a> */}
             <a
               href="#skills"
               className="text-lg font-medium hover:text-[rgb(var(--color-primary))] active:bg-[rgba(var(--color-primary),0.1)] transition-all flex justify-between items-center px-4 py-3 rounded-lg active:scale-95 duration-150 touch-none select-none"
               onClick={handleLinkClick}
             >
               Skills
+               <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
             </a>
             <a
               href="#about"
               className="text-lg font-medium hover:text-[rgb(var(--color-primary))] active:bg-[rgba(var(--color-primary),0.1)] transition-all flex justify-between items-center px-4 py-3 rounded-lg active:scale-95 duration-150 touch-none select-none"
               onClick={handleLinkClick}
             >
-              About
+              About Me
               <svg
                 className="w-5 h-5"
                 fill="none"
