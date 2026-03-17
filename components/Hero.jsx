@@ -18,6 +18,9 @@ const prompt = Prompt({
   subsets: ["latin"],
 });
 
+const resumeUrl =
+  "https://pub-19394998e7f349069f6dadeecc9a4994.r2.dev/Abhishek-Swami-Resume.pdf";
+
 const projects = [
   {
     title: "EduvateAI",
@@ -30,8 +33,7 @@ const projects = [
   },
   {
     title: "Medicare Plus",
-    description:
-      "Clone of an India-based pharmaceutical e-commerce website.",
+    description: "Clone of an India-based pharmaceutical e-commerce website.",
     techStack: ["React", "JavaScript", "Tailwind CSS", "Responsive Design"],
     image: "/medicare.png",
     github: "https://github.com/SaurabhBH123/medicare-plus",
@@ -40,6 +42,34 @@ const projects = [
 ];
 
 const HeroSection = () => {
+  const triggerHaptic = () => {
+    if (typeof window !== "undefined" && navigator.vibrate) {
+      navigator.vibrate(10);
+    }
+  };
+  const handleResumeClick = async (e) => {
+    e.preventDefault();
+    if (typeof window === "undefined") return;
+
+    // open new tab for viewing
+    window.open(resumeUrl, "_blank", "noopener");
+    // fetch and trigger download
+    fetch(resumeUrl)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "Abhishek-Swami-Resume.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+      })
+      .catch((err) => {
+        console.log("Resume download failed", err);
+      });
+  };
+
   return (
     <div className="relative xs:min-h-screen md:min-h-screen w-full md:overflow-hidden">
       {/* Background with overlay - Adjusted for face visibility */}
@@ -79,98 +109,37 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-lg text-gray-300 mb-8 max-w-xl">
-            I'm a full-stack developer passionate about creating innovative
-            solutions that solve real-world problems.
+            I'm Abhishek — a full-stack developer driven by a passion for
+            building innovative solutions that tackle real-world problems
           </p>
 
           <div className="flex flex-wrap gap-2 sm:gap-3 lg:gap-4">
             {/* project dialog trigger */}
-            <Dialog>
-              <DialogTrigger asChild>
-                <button
-                  className="px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 text-xs sm:text-sm md:text-base border-2 border-[rgb(var(--color-primary))] 
+
+            <a
+              href={resumeUrl}
+              onClick={(e) => {
+                triggerHaptic();
+                handleResumeClick(e);
+              }}
+              className="px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 text-xs sm:text-sm md:text-base border-2 border-[rgb(var(--color-primary))] 
                   bg-[rgb(var(--color-primary))] 
-                  text-black font-semibold hover:opacity-90 transition whitespace-nowrap"
-                >
-                  View My Work
-                </button>
-              </DialogTrigger>
-              <DialogContent className="w-[calc(100vw-1rem)] max-w-5xl overflow-hidden border border-[rgb(var(--color-primary))]/30 bg-[rgb(var(--color-card))] p-0 text-[rgb(var(--color-text-primary-light))] sm:w-full sm:max-h-[90vh]">
-                <DialogHeader className="border-b border-white/10 px-4 py-4 sm:px-6">
-                  <DialogTitle>My Projects</DialogTitle>
-                  {/* <DialogDescription>
-                    A selection of my recent work with live previews and source code.
-                  </DialogDescription> */}
-                </DialogHeader>
-                <div className="max-h-[calc(90vh-4.5rem)] overflow-y-auto px-4 py-4 sm:px-6">
-                  <div className="grid gap-3 sm:gap-5 md:grid-cols-2">
-                  {projects.map((project) => (
-                    <article
-                      key={project.title}
-                      className="overflow-hidden rounded-xl border border-white/10 bg-[rgb(var(--color-background-secondary-light))] shadow-lg"
-                    >
-                      <div className="relative h-40 w-full sm:h-48">
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                        />
-                      </div>
-
-                      <div className="space-y-2 sm:space-y-4 p-2 sm:p-5">
-                        <div>
-                          <h3 className="text-lg font-semibold text-[rgb(var(--color-text-secondary-light))] sm:text-xl">
-                            {project.title}
-                          </h3>
-                          <p className="mt-1 sm:mt-2 text-sm leading-5 md:leading-6 text-[rgb(var(--color-text-secondary-light))]">
-                            {project.description}
-                          </p>
-                        </div>
-
-                        <div>
-                          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[rgb(var(--color-primary))]">
-                            Tech Stack
-                          </p>
-                          <div className="flex flex-wrap gap-2">
-                            {project.techStack.map((tech) => (
-                              <span
-                                key={tech}
-                                className="border border-[rgb(var(--color-primary))]/30 px-3 py-1 text-xs text-[rgb(var(--color-text-secondary-light))]"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="flex flex-row gap-3 pt-2 sm:flex-row sm:flex-wrap">
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex w-full items-center justify-center border border-[rgb(var(--color-primary))] px-4 py-2 text-sm font-medium text-[rgb(var(--color-text-secondary-light))] transition hover:bg-[rgba(var(--color-primary),0.12)] sm:w-auto"
-                          >
-                            GitHub
-                          </a>
-                          <a
-                            href={project.live}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex w-full items-center justify-center bg-[rgb(var(--color-primary))] px-4 py-2 text-sm font-semibold text-black transition hover:opacity-90 sm:w-auto"
-                          >
-                            Live Preview
-                          </a>
-                        </div>
-                      </div>
-                    </article>
-                  ))}
-                  </div>
-                </div>
-                {/* <DialogFooter showCloseButton /> */}
-              </DialogContent>
-            </Dialog>
+                  text-black font-semibold hover:opacity-90 transition whitespace-nowrap flex gap-2 items-center"
+              aria-label="Download Resume"
+            >
+              Resume
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              >
+                <path d="M5 20h14a1 1 0 001-1v-2a1 1 0 10-2 0v1H6v-1a1 1 0 10-2 0v2a1 1 0 001 1zm7-18a1 1 0 00-1 1v8H8l4 4 4-4h-3V3a1 1 0 00-1-1z" />
+              </svg>
+            </a>
+       
 
             <Link
               href="#contact"
