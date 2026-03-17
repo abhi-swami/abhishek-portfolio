@@ -78,7 +78,7 @@ export default function Projects() {
                     {project.description}
                   </p>
 
-                  <div className="border border-white/8 bg-black/15 p-2 md:p-4">
+                  <div className="border border-white/8 bg-black/15 p-2 md:p-4 rounded-xl">
                     <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.26em] text-[rgb(var(--color-primary))] sm:text-xs">
                       Tech Stack
                     </p>

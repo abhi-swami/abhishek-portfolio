@@ -97,6 +97,15 @@ const skills = [
   { icon: "NPM", text: "npm" },
 ];
 
+const softSkills = [
+  "Effective Communication",
+  "Problem Solving",
+  "Team Collaboration",
+  "Adaptability",
+  "Ownership",
+  "Time Management",
+];
+
 export default function SkillsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const totalSkills = skills.length;
@@ -224,6 +233,29 @@ export default function SkillsSection() {
                 aria-selected={index === activeIndex}
                 role="tab"
               />
+            ))}
+          </div>
+        </div>
+
+        <div className="mx-auto mt-8 max-w-5xl rounded-2xl border border-white/10 bg-[rgb(var(--color-card))]/60  p-2 md:p-4 sm:mt-10 sm:p-6">
+          <div className="text-center">
+            <h3 className="text-lg font-semibold text-[rgb(var(--color-text-primary-light))] sm:text-xl">
+              Soft Skills
+            </h3>
+            <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-white/70">
+              Beyond the stack, I focus on working clearly, shipping reliably,
+              and collaborating well across teams.
+            </p>
+          </div>
+
+          <div className="mt-5 flex flex-wrap justify-center gap-1.5 md:gap-3">
+            {softSkills.map((skill) => (
+              <span
+                key={skill}
+                className="border border-[rgb(var(--color-primary))]/25 bg-[rgb(var(--color-primary))]/10 p-2 md:px-4 md:py-2 text-sm font-medium text-[rgb(var(--color-text-primary-light))]"
+              >
+                {skill}
+              </span>
             ))}
           </div>
         </div>

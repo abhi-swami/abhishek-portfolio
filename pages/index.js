@@ -71,6 +71,7 @@ export default function Home() {
         <HeroSection />
         <AboutMe />
         <Skills />
+        {/* Revert the protfolio form here and just remove the project section */}
         <Projects/>
         <Stats />
         <Contact />
